@@ -49,10 +49,3 @@ snake.move = function() {
     this.telo[0].x += posun_x;
     this.telo[0].y += posun_y;
 }
-
-class suradnice {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-}
