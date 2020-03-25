@@ -1,8 +1,8 @@
 var canvas;
 var ctx;
-const POSUN = 15;
-var posun_x = 2*POSUN;
-var posun_y = 0;
+const POSUN = 10;
+var posun_x = 0;
+var posun_y = 2*POSUN;
 
 // var background = new Image();
 // background.src = './graphics/trava.jpg';
