@@ -8,6 +8,7 @@ var posun_y = 2*POSUN;
 var keys = [];
 var tick = 0;
 var skore = 0;
+var powerup = 0;
 
 class suradnice {
     constructor(x, y) {
@@ -26,7 +27,13 @@ window.onload = function() {
         snake.telo.push(new suradnice(100 + i * 2*POSUN, 110));
     }
 
-    //this.requestAnimationFrame(step);
+    //umiestnenie jedla na nahodne suradnice.
+    jedlo.x = Math.floor(Math.random() * canvas.width);
+    jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
+    
+
+
+    //requestAnimationFrame(step);
     setInterval(step, 1000 / FPS);
 }
 
@@ -36,7 +43,9 @@ function step() {
     ctx.drawImage(background, 0, 49);
     zmena_smeru();
     snake.move();
-    snake.draw();    
+    snake.draw(); 
+    
+    jedlo.draw(powerup);
 
     //odrazanie od stien, toto potom aj tak nikde nebude
     if (snake.telo[0].x >= canvas.width - POSUN || snake.telo[0].x <= 0 + POSUN) {
@@ -56,6 +65,15 @@ function step() {
 
     if (!(tick % FPS)) {
         skore++;
+        if (!(tick % (5*FPS))) {
+            jedlo.x = Math.floor(Math.random() * canvas.width);
+            jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
+            if (Math.floor((Math.random() * 100)) <= 25) {
+                powerup = 1;
+            }
+            else powerup = 0;
+            console.log(powerup);
+        }
     }
 
     ctx.font = "30px Arial"
@@ -66,7 +84,7 @@ function step() {
 window.onkeydown = function(event) {
     if (!keys[event.keyCode]) {
         keys[event.keyCode] = true;
-        console.log(event.keyCode);
+        //console.log(event.keyCode);
     }
 }
 
