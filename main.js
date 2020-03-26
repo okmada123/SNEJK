@@ -2,9 +2,12 @@ var canvas;
 var ctx;
 const POSUN = 10;
 const DEFAULT_DLZKA_HADA = 20;
-var posun_x = 2*POSUN;
-var posun_y = 0;
+const FPS = 10;
+var posun_x = 0;
+var posun_y = 2*POSUN;
 var keys = [];
+var tick = 0;
+var skore = 0;
 
 class suradnice {
     constructor(x, y) {
@@ -24,16 +27,18 @@ window.onload = function() {
     }
 
     //this.requestAnimationFrame(step);
-    setInterval(step, 1000 / 8);
+    setInterval(step, 1000 / FPS);
 }
 
-function step() {
+function step() {  
+    tick++;  
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(background, 0, 49);
     zmena_smeru();
     snake.move();
-    snake.draw();
+    snake.draw();    
 
+    //odrazanie od stien, toto potom aj tak nikde nebude
     if (snake.telo[0].x >= canvas.width - POSUN || snake.telo[0].x <= 0 + POSUN) {
         posun_x *= -1;
     }
@@ -42,11 +47,19 @@ function step() {
     }
 
     //tieto blbosti potom presunut niekde inde, nech je tato funkcia cista
+    //asi potom spravit funkciu view() alebo draw(), ktora vykresli vsetko
     ctx.beginPath();
     ctx.moveTo(0, 50);
     ctx.lineTo(canvas.width, 50);
     ctx.stroke();
     ctx.closePath();
+
+    if (!(tick % FPS)) {
+        skore++;
+    }
+
+    ctx.font = "30px Arial"
+    ctx.fillText("Skore: " + skore, 10, 30);
 }
 
 //key presses
