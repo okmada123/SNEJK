@@ -37,6 +37,14 @@ function step() {
     tick++;  
     zmena_smeru();
     snake.move();
+
+    //po pohybe skontrolovat, ci nezakusol do jedla
+    if (zjedenie_check()) {
+        if (powerup) snake.powerup();
+        else snake.zjedenie();
+        jedlo_update();
+        console.log(snake.telo);
+    }
     
     //odrazanie od stien, toto potom aj tak nikde nebude
     if (snake.telo[0].x >= canvas.width - POSUN || snake.telo[0].x <= 0 + POSUN) {
@@ -49,15 +57,15 @@ function step() {
     //toto tu potom nebude v takej podobe. nove jedlo sa bude generovat po zjedeni predosleho
     if (!(tick % FPS)) {
         skore++;
-        if (!(tick % (5*FPS))) {
-            jedlo.x = Math.floor(Math.random() * canvas.width);
-            jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
-            if (Math.floor((Math.random() * 100)) <= 25) {
-                powerup = 1;
-            }
-            else powerup = 0;
-            snake.zjedenie();
-        }
+        // if (!(tick % (5*FPS))) {
+        //     jedlo_update();
+        //     if (Math.floor((Math.random() * 100)) <= 25) {
+        //         powerup = 1;
+        //     }
+        //     else powerup = 0;
+        //     //toto jedenie tu potom nebude
+        //     snake.zjedenie();
+        // }
     }
     
     render();
@@ -82,6 +90,75 @@ function draw_score_panel() {
     ctx.closePath();
     ctx.font = "30px Arial"
     ctx.fillText("Skore: " + skore, 10, 30);
+}
+
+function zjedenie_check() {
+    //porovnavame podla toho akym ideme smerom
+    if (posun_y == 0) {
+        //ak ideme doprava
+        if (posun_x > 0) {
+            if (snake.telo[0].x < jedlo.x) {
+                if (snake.telo[0].x + 15 >= (jedlo.x - 25) && (snake.telo[0].y >= jedlo.y - 25 && snake.telo[0].y <= jedlo.y + 25)) {
+                    console.log("HIT! VYCHOD");
+                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
+                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
+                    console.log("---------------------------");
+                    //jedlo_update();
+                    return 1;
+                }
+            }
+        }
+        //ak ideme dolava
+        else if (posun_x < 0) {
+            if (snake.telo[0].x > jedlo.x) {
+                if ((snake.telo[0].x - 15 <= (jedlo.x + 25)) && (snake.telo[0].y >= jedlo.y - 25 && snake.telo[0].y <= jedlo.y + 25)) {
+                    console.log("HIT! ZAPAD");
+                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
+                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
+                    console.log("---------------------------");
+                    //jedlo_update();
+                    return 1;
+                }
+            }
+        }
+    }
+    if (posun_x == 0) {
+        //ak ideme dole
+        if (posun_y > 0) {
+            if (snake.telo[0].y < jedlo.y) {
+                if (snake.telo[0].y + 15 >= (jedlo.y - 25) && (snake.telo[0].x >= jedlo.x - 25 && snake.telo[0].x <= jedlo.x + 25)) {
+                    console.log("HIT! JUH");
+                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
+                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
+                    console.log("---------------------------");
+                    //jedlo_update();
+                    return 1;
+                }
+            }
+        }
+        //ak ideme hore
+        else if (posun_y < 0) {
+            if (snake.telo[0].y > jedlo.y) {
+                if ((snake.telo[0].y - 15 <= (jedlo.y + 25)) && (snake.telo[0].x >= jedlo.x - 25 && snake.telo[0].x <= jedlo.x + 25)) {
+                    console.log("HIT! SEVER");
+                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
+                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
+                    console.log("---------------------------");
+                    //jedlo_update();
+                    return 1;
+                }
+            }
+        }
+    }
+}
+
+function jedlo_update() {
+    jedlo.x = Math.floor(Math.random() * canvas.width);
+    jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
+    if (Math.floor((Math.random() * 100)) <= 50) {
+        powerup = 1;
+    }
+    else powerup = 0;
 }
 
 //key presses

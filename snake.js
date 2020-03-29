@@ -1,7 +1,7 @@
 var snake = {}
 snake.telo = [];
 snake.draw = function() {
-    for (i = 1; i < this.telo.length-1; i++) {
+    for (i = 1; i < this.telo.length; i++) {
         ctx.drawImage(body, this.telo[i].x-15, this.telo[i].y-15);
     }
     //vykreslenie hlavy
