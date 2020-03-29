@@ -64,7 +64,7 @@ function step() {
             console.log(snake.telo.length);
             jedlo.x = Math.floor(Math.random() * canvas.width);
             jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
-            if (Math.floor((Math.random() * 100)) <= 25) {
+            if (Math.floor((Math.random() * 100)) <= 100) {
                 powerup = 1;
             }
             else powerup = 0;
