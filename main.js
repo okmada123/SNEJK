@@ -17,7 +17,6 @@ class suradnice {
     }
 }
 
-
 window.onload = function() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
@@ -31,9 +30,6 @@ window.onload = function() {
     jedlo.x = Math.floor(Math.random() * canvas.width);
     jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
     
-
-
-    //requestAnimationFrame(step);
     setInterval(step, 1000 / FPS);
 }
 
@@ -50,21 +46,13 @@ function step() {
         posun_y *= -1;
     }
     
-    //tieto blbosti potom presunut niekde inde, nech je tato funkcia cista
-    //asi potom spravit funkciu view() alebo draw(), ktora vykresli vsetko
-    ctx.beginPath();
-    ctx.moveTo(0, 50);
-    ctx.lineTo(canvas.width, 50);
-    ctx.stroke();
-    ctx.closePath();
-    
+    //toto tu potom nebude v takej podobe. nove jedlo sa bude generovat po zjedeni predosleho
     if (!(tick % FPS)) {
         skore++;
         if (!(tick % (5*FPS))) {
-            console.log(snake.telo.length);
             jedlo.x = Math.floor(Math.random() * canvas.width);
             jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
-            if (Math.floor((Math.random() * 100)) <= 100) {
+            if (Math.floor((Math.random() * 100)) <= 25) {
                 powerup = 1;
             }
             else powerup = 0;
@@ -72,11 +60,26 @@ function step() {
         }
     }
     
-    //nakoniec sa vsetko vykresli
+    render();
+}
+
+function render() {
+    //vycistenie canvasu
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(background, 0, 49);
+    
+    //vykreslenie objektov
     jedlo.draw(powerup);
     snake.draw(); 
+    draw_score_panel();
+}
+
+function draw_score_panel() {
+    ctx.beginPath();
+    ctx.moveTo(0, 50);
+    ctx.lineTo(canvas.width, 50);
+    ctx.stroke();
+    ctx.closePath();
     ctx.font = "30px Arial"
     ctx.fillText("Skore: " + skore, 10, 30);
 }
