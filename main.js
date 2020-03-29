@@ -39,14 +39,9 @@ window.onload = function() {
 
 function step() {  
     tick++;  
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(background, 0, 49);
     zmena_smeru();
     snake.move();
-    snake.draw(); 
     
-    jedlo.draw(powerup);
-
     //odrazanie od stien, toto potom aj tak nikde nebude
     if (snake.telo[0].x >= canvas.width - POSUN || snake.telo[0].x <= 0 + POSUN) {
         posun_x *= -1;
@@ -54,7 +49,7 @@ function step() {
     else if (snake.telo[0].y >= canvas.height - POSUN || snake.telo[0].y <= 50 + POSUN) {
         posun_y *= -1;
     }
-
+    
     //tieto blbosti potom presunut niekde inde, nech je tato funkcia cista
     //asi potom spravit funkciu view() alebo draw(), ktora vykresli vsetko
     ctx.beginPath();
@@ -62,20 +57,26 @@ function step() {
     ctx.lineTo(canvas.width, 50);
     ctx.stroke();
     ctx.closePath();
-
+    
     if (!(tick % FPS)) {
         skore++;
         if (!(tick % (5*FPS))) {
+            console.log(snake.telo.length);
             jedlo.x = Math.floor(Math.random() * canvas.width);
             jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
             if (Math.floor((Math.random() * 100)) <= 25) {
                 powerup = 1;
             }
             else powerup = 0;
-            console.log(powerup);
+            snake.zjedenie();
         }
     }
-
+    
+    //nakoniec sa vsetko vykresli
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(background, 0, 49);
+    jedlo.draw(powerup);
+    snake.draw(); 
     ctx.font = "30px Arial"
     ctx.fillText("Skore: " + skore, 10, 30);
 }

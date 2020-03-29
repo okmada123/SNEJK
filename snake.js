@@ -44,3 +44,11 @@ snake.move = function() {
     this.telo[0].x += posun_x;
     this.telo[0].y += posun_y;
 }
+snake.zjedenie = function() {
+    this.telo.push(new suradnice(this.telo[this.telo.length - 1].x, this.telo[this.telo.length - 1].y));
+}
+snake.powerup = function() {
+    for (i = 0; i < 5; i++) {
+        this.telo.pop();
+    }
+}
