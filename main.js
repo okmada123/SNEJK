@@ -90,7 +90,7 @@ function zjedenie_check() {
         //ak ideme doprava
         if (snake.dx > 0) {
             if (snake.telo[0].x < jedlo.x) {
-                if (snake.telo[0].x + 15 >= (jedlo.x - 25) && (snake.telo[0].y >= jedlo.y - 25 && snake.telo[0].y <= jedlo.y + 25)) {
+                if (snake.telo[0].x + 15 >= (jedlo.x - 25) && ((snake.telo[0].y - 15 > jedlo.y - 25 && snake.telo[0].y - 15 < jedlo.y + 25) || (snake.telo[0].y + 15 > jedlo.y - 25 && snake.telo[0].y + 15 < jedlo.y + 25))) {
                     console.log("HIT! VYCHOD");
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
@@ -102,7 +102,7 @@ function zjedenie_check() {
         //ak ideme dolava
         else if (snake.dx < 0) {
             if (snake.telo[0].x > jedlo.x) {
-                if ((snake.telo[0].x - 15 <= (jedlo.x + 25)) && (snake.telo[0].y >= jedlo.y - 25 && snake.telo[0].y <= jedlo.y + 25)) {
+                if (snake.telo[0].x - 15 <= (jedlo.x + 25) && ((snake.telo[0].y - 15 > jedlo.y - 25 && snake.telo[0].y - 15 < jedlo.y + 25) || (snake.telo[0].y + 15 > jedlo.y - 25 && snake.telo[0].y + 15 < jedlo.y + 25))) {
                     console.log("HIT! ZAPAD");
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
@@ -116,7 +116,7 @@ function zjedenie_check() {
         //ak ideme dole
         if (snake.dy > 0) {
             if (snake.telo[0].y < jedlo.y) {
-                if (snake.telo[0].y + 15 >= (jedlo.y - 25) && (snake.telo[0].x >= jedlo.x - 25 && snake.telo[0].x <= jedlo.x + 25)) {
+                if (snake.telo[0].y + 15 >= (jedlo.y - 25) && ((snake.telo[0].x - 15 > jedlo.x - 25 && snake.telo[0].x - 15 < jedlo.x + 25) || (snake.telo[0].x + 15 > jedlo.x - 25 && snake.telo[0].x + 15 < jedlo.x + 25))) {
                     console.log("HIT! JUH");
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
@@ -128,7 +128,7 @@ function zjedenie_check() {
         //ak ideme hore
         else if (snake.dy < 0) {
             if (snake.telo[0].y > jedlo.y) {
-                if ((snake.telo[0].y - 15 <= (jedlo.y + 25)) && (snake.telo[0].x >= jedlo.x - 25 && snake.telo[0].x <= jedlo.x + 25)) {
+                if ((snake.telo[0].y - 15 <= (jedlo.y + 25)) && ((snake.telo[0].x - 15 > jedlo.x - 25 && snake.telo[0].x - 15 < jedlo.x + 25) || (snake.telo[0].x + 15 > jedlo.x - 25 && snake.telo[0].x + 15 < jedlo.x + 25))) {
                     console.log("HIT! SEVER");
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
