@@ -6,12 +6,6 @@ var keys = [];
 var tick = 0;
 var skore = 0;
 
-class suradnice {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 function start_game() {
      //innicializacia tela hada

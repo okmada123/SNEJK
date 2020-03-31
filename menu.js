@@ -7,20 +7,32 @@ class Button {
         this.height = height; 
     }
     draw_self = function() {
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
-    action = function() {
-        alert("Tento button este nema priradenu ziadnu funkciu.");
+    onclick = function() {
+        alert(this.text);
+    }
+}
+
+var menu_scena = {}
+menu_scena.clickables = [];
+menu_scena.onclick = function(point) {
+    for (i in menu_scena.clickables) {
+        var aktualny = menu_scena.clickables[i];    
+        if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
+            aktualny.onclick();
+        }
     }
 }
 
 //Inicializuje a vykresli menu
 function menu() {
-    var buttons = [];
-    buttons.push(new Button ("Spustit hru", 50, 50, 100, 50));
-    buttons.push(new Button ("Instrukcie", 50, 150, 100, 50));
-    buttons.push(new Button ("Najvyssie skore", 50, 250, 100, 50));
-    for (i in buttons) {
-        buttons[i].draw_self();
+
+    menu_scena.clickables.push(new Button ("Spustit hru", canvas.width / 2 - 100, 50, 200, 50));
+    menu_scena.clickables.push(new Button ("Instrukcie", canvas.width / 2 - 100, 150, 200, 50));
+    menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 250, 200, 50));
+    for (i in menu_scena.clickables) {
+        menu_scena.clickables[i].draw_self();
+        console.log(i);
     }
 }
