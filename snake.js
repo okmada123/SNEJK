@@ -6,7 +6,7 @@ snake.draw = function() {
     }
     //vykreslenie hlavy
     //ak ideme smerom dolava
-    if (posun_x < 0 && posun_y == 0) {
+    if (this.dx < 0 && this.dy == 0) {
         ctx.save();
         ctx.translate(this.telo[0].x, this.telo[0].y);
         ctx.rotate(Math.PI / 2);  
@@ -14,7 +14,7 @@ snake.draw = function() {
         ctx.restore();
     }
     //ak ideme smerom doprava
-    else if (posun_x > 0 && posun_y == 0) {
+    else if (this.dx > 0 && this.dy == 0) {
         ctx.save();
         ctx.translate(this.telo[0].x, this.telo[0].y);
         ctx.rotate(3 * Math.PI / 2);  
@@ -22,11 +22,11 @@ snake.draw = function() {
         ctx.restore();
     }
     //ak ideme dole
-    else if (posun_x == 0 && posun_y > 0) {        
+    else if (this.dx == 0 && this.dy > 0) {        
         ctx.drawImage(head, this.telo[0].x - 15, this.telo[0].y - 15);        
     }
     //ak ideme hore
-    else if (posun_x == 0 && posun_y < 0) {
+    else if (this.dx == 0 && this.dy < 0) {
         ctx.save();
         ctx.translate(this.telo[0].x, this.telo[0].y);
         ctx.rotate(Math.PI);  
@@ -41,8 +41,8 @@ snake.move = function() {
         this.telo[i].y = this.telo[i-1].y;
     }
     //hlava sa posunie v smere posunu
-    this.telo[0].x += posun_x;
-    this.telo[0].y += posun_y;
+    this.telo[0].x += this.dx;
+    this.telo[0].y += this.dy;
 }
 snake.zjedenie = function() {
     this.telo.push(new suradnice(this.telo[this.telo.length - 1].x, this.telo[this.telo.length - 1].y));

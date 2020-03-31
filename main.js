@@ -3,8 +3,6 @@ var ctx;
 const POSUN = 20;
 const DEFAULT_DLZKA_HADA = 20;
 const FPS = 10;
-var posun_x = 0;
-var posun_y = POSUN;
 var keys = [];
 var tick = 0;
 var skore = 0;
@@ -25,6 +23,10 @@ window.onload = function() {
     for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
         snake.telo.push(new suradnice(100 + i * POSUN, 110));
     }
+
+    //defaultne nastavenie smeru pohybu hada
+    snake.dx = 0;
+    snake.dy = POSUN;
 
     //umiestnenie jedla na nahodne suradnice.
     jedlo.x = Math.floor(Math.random() * canvas.width);
@@ -48,10 +50,10 @@ function mainloop() {
     
     //odrazanie od stien, toto potom aj tak nikde nebude
     if (snake.telo[0].x >= canvas.width - POSUN || snake.telo[0].x <= 0 + POSUN) {
-        posun_x *= -1;
+        snake.dx *= -1;
     }
     else if (snake.telo[0].y >= canvas.height - POSUN || snake.telo[0].y <= 50 + POSUN) {
-        posun_y *= -1;
+        snake.dy *= -1;
     }
     
     if (!(tick % FPS)) {
@@ -84,9 +86,9 @@ function draw_score_panel() {
 
 function zjedenie_check() {
     //porovnavame podla toho akym ideme smerom
-    if (posun_y == 0) {
+    if (snake.dy == 0) {
         //ak ideme doprava
-        if (posun_x > 0) {
+        if (snake.dx > 0) {
             if (snake.telo[0].x < jedlo.x) {
                 if (snake.telo[0].x + 15 >= (jedlo.x - 25) && (snake.telo[0].y >= jedlo.y - 25 && snake.telo[0].y <= jedlo.y + 25)) {
                     console.log("HIT! VYCHOD");
@@ -99,7 +101,7 @@ function zjedenie_check() {
             }
         }
         //ak ideme dolava
-        else if (posun_x < 0) {
+        else if (snake.dx < 0) {
             if (snake.telo[0].x > jedlo.x) {
                 if ((snake.telo[0].x - 15 <= (jedlo.x + 25)) && (snake.telo[0].y >= jedlo.y - 25 && snake.telo[0].y <= jedlo.y + 25)) {
                     console.log("HIT! ZAPAD");
@@ -112,9 +114,9 @@ function zjedenie_check() {
             }
         }
     }
-    if (posun_x == 0) {
+    if (snake.dx == 0) {
         //ak ideme dole
-        if (posun_y > 0) {
+        if (snake.dy > 0) {
             if (snake.telo[0].y < jedlo.y) {
                 if (snake.telo[0].y + 15 >= (jedlo.y - 25) && (snake.telo[0].x >= jedlo.x - 25 && snake.telo[0].x <= jedlo.x + 25)) {
                     console.log("HIT! JUH");
@@ -127,7 +129,7 @@ function zjedenie_check() {
             }
         }
         //ak ideme hore
-        else if (posun_y < 0) {
+        else if (snake.dy < 0) {
             if (snake.telo[0].y > jedlo.y) {
                 if ((snake.telo[0].y - 15 <= (jedlo.y + 25)) && (snake.telo[0].x >= jedlo.x - 25 && snake.telo[0].x <= jedlo.x + 25)) {
                     console.log("HIT! SEVER");
@@ -163,32 +165,32 @@ function zmena_smeru() {
     //hore
     if (keys[38]) {
         //kontrola, ci nejdeme dole
-        if (!(posun_y > 0)) {
-            posun_x = 0;
-            posun_y = -POSUN;
+        if (!(snake.dy > 0)) {
+            snake.dx = 0;
+            snake.dy = -POSUN;
         }
     }
     //dole
     if (keys[40]) {
         //kontrola, ci nejdeme hore
-        if (!(posun_y < 0)) {
-            posun_x = 0;
-            posun_y = POSUN;
+        if (!(snake.dy < 0)) {
+            snake.dx = 0;
+            snake.dy = POSUN;
         }
     }
     //doprava
     if (keys[39]) {
         //kontrola, ci nejdeme dolava
-        if (!(posun_x < 0)) {
-            posun_x = POSUN;
-            posun_y = 0;
+        if (!(snake.dx < 0)) {
+            snake.dx = POSUN;
+            snake.dy = 0;
         }
     }
     if (keys[37]) {
         //kontrola, ci nejdeme doprava
-        if (!(posun_x > 0)) {
-            posun_x = -POSUN;
-            posun_y = 0;
+        if (!(snake.dx > 0)) {
+            snake.dx = -POSUN;
+            snake.dy = 0;
         }
     }
     keys[37] = false;
