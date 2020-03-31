@@ -136,13 +136,13 @@ function zjedenie_check() {
     }
 }
 
-//key presses
-window.onkeydown = function(event) {
-    if (!keys[event.keyCode]) {
-        keys[event.keyCode] = true;
-        //console.log(event.keyCode);
-    }
-}
+// //key presses
+// window.onkeydown = function(event) {
+//     if (!keys[event.keyCode]) {
+//         keys[event.keyCode] = true;
+//         //console.log(event.keyCode);
+//     }
+// }
 
 function zmena_smeru() {
     //hore
