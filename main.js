@@ -6,7 +6,6 @@ const FPS = 10;
 var keys = [];
 var tick = 0;
 var skore = 0;
-var powerup = 0;
 
 class suradnice {
     constructor(x, y) {
@@ -28,7 +27,8 @@ window.onload = function() {
     snake.dx = 0;
     snake.dy = POSUN;
 
-    //umiestnenie jedla na nahodne suradnice.
+    //generovanie prveho jedla
+    jedlo.powerup = false;
     jedlo.x = Math.floor(Math.random() * canvas.width);
     jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
     
@@ -42,7 +42,7 @@ function mainloop() {
 
     //po pohybe skontrolovat, ci nezakusol do jedla
     if (zjedenie_check()) {
-        if (powerup) snake.powerup();
+        if (jedlo.powerup) snake.powerup();
         else snake.zjedenie();
         jedlo_update();
         console.log(snake.telo);
@@ -69,7 +69,7 @@ function render() {
     ctx.drawImage(background, 0, 49);
     
     //vykreslenie objektov
-    jedlo.draw(powerup);
+    jedlo.draw();
     snake.draw(); 
     draw_score_panel();
 }
@@ -148,9 +148,9 @@ function jedlo_update() {
     jedlo.x = Math.floor(Math.random() * canvas.width);
     jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
     if (Math.floor((Math.random() * 100)) <= 50) {
-        powerup = 1;
+        jedlo.powerup = true;
     }
-    else powerup = 0;
+    else jedlo.powerup = false;
 }
 
 //key presses
