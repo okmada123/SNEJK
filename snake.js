@@ -45,7 +45,7 @@ snake.move = function() {
     this.telo[0].y += this.dy;
 }
 snake.zjedenie = function() {
-    this.telo.push(new suradnice(this.telo[this.telo.length - 1].x, this.telo[this.telo.length - 1].y));
+    this.telo.push(new Suradnice(this.telo[this.telo.length - 1].x, this.telo[this.telo.length - 1].y));
 }
 snake.powerup = function() {    
     for (i = 0; i < 5 && this.telo.length > 3; i++) {

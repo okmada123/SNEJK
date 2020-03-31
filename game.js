@@ -5,12 +5,14 @@ const SANCA_NA_POWERUP = 20;
 var keys = [];
 var tick = 0;
 var skore = 0;
+var timer;
 
 
 function start_game() {
+    scena = 0;
      //innicializacia tela hada
      for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
-        snake.telo.push(new suradnice(100 + i * POSUN, 110));
+        snake.telo.push(new Suradnice(100 + i * POSUN, 110));
     }
 
     //defaultne nastavenie smeru pohybu hada
@@ -22,7 +24,7 @@ function start_game() {
     jedlo.x = Math.floor(Math.random() * canvas.width);
     jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
     
-    setInterval(mainloop, 1000 / FPS);
+    timer = setInterval(mainloop, 1000 / FPS);
 }
 
 function mainloop() {  
@@ -81,10 +83,6 @@ function zjedenie_check() {
         if (snake.dx > 0) {
             if (snake.telo[0].x < jedlo.x) {
                 if (snake.telo[0].x + 15 >= (jedlo.x - 25) && ((snake.telo[0].y - 15 > jedlo.y - 25 && snake.telo[0].y - 15 < jedlo.y + 25) || (snake.telo[0].y + 15 > jedlo.y - 25 && snake.telo[0].y + 15 < jedlo.y + 25))) {
-                    console.log("HIT! VYCHOD");
-                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
-                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
-                    console.log("---------------------------");
                     hit();
                 }
             }
@@ -93,10 +91,6 @@ function zjedenie_check() {
         else if (snake.dx < 0) {
             if (snake.telo[0].x > jedlo.x) {
                 if (snake.telo[0].x - 15 <= (jedlo.x + 25) && ((snake.telo[0].y - 15 > jedlo.y - 25 && snake.telo[0].y - 15 < jedlo.y + 25) || (snake.telo[0].y + 15 > jedlo.y - 25 && snake.telo[0].y + 15 < jedlo.y + 25))) {
-                    console.log("HIT! ZAPAD");
-                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
-                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
-                    console.log("---------------------------");
                     hit();
                 }
             }
@@ -107,10 +101,6 @@ function zjedenie_check() {
         if (snake.dy > 0) {
             if (snake.telo[0].y < jedlo.y) {
                 if (snake.telo[0].y + 15 >= (jedlo.y - 25) && ((snake.telo[0].x - 15 > jedlo.x - 25 && snake.telo[0].x - 15 < jedlo.x + 25) || (snake.telo[0].x + 15 > jedlo.x - 25 && snake.telo[0].x + 15 < jedlo.x + 25))) {
-                    console.log("HIT! JUH");
-                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
-                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
-                    console.log("---------------------------");
                     hit();
                 }
             }
@@ -119,10 +109,6 @@ function zjedenie_check() {
         else if (snake.dy < 0) {
             if (snake.telo[0].y > jedlo.y) {
                 if ((snake.telo[0].y - 15 <= (jedlo.y + 25)) && ((snake.telo[0].x - 15 > jedlo.x - 25 && snake.telo[0].x - 15 < jedlo.x + 25) || (snake.telo[0].x + 15 > jedlo.x - 25 && snake.telo[0].x + 15 < jedlo.x + 25))) {
-                    console.log("HIT! SEVER");
-                    console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
-                    console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
-                    console.log("---------------------------");
                     hit();
                 }
             }

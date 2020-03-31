@@ -1,6 +1,6 @@
 var canvas;
 var ctx;
-var scene;
+var scena;  // 0 = hra,  1 = menu
 
 class Suradnice {
     constructor(x, y) {
@@ -14,7 +14,6 @@ window.onload = function() {
     ctx = canvas.getContext("2d");
     
     menu();
-    //scene = 0;
     //start_game();
 }
 
@@ -26,10 +25,12 @@ window.onkeydown = function(event) {
     }
 }
 
+//mouse click handler
 window.onclick = function(event) {
     var x = event.pageX - canvas.offsetLeft;
     var y = event.pageY - canvas.offsetTop;
     var point = new Suradnice(x, y);
     //switch case na scenu...
-    menu_scena.onclick(point);
+    if (scena == 1) menu_scena.onclick(point);
+    else console.log(point);
 }
