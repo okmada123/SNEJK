@@ -40,6 +40,24 @@ function menu() {
     menu_scena.clickables.push(new Button ("Spustit hru", canvas.width / 2 - 100, 250, 200, 50));
     menu_scena.clickables.push(new Button ("Instrukcie", canvas.width / 2 - 100, 350, 200, 50));
     menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 450, 200, 50));
+
+    //zvuk button
+    var zvuk = new Button ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
+    zvuk.zapnuty = true;
+    zvuk.draw_self = function() {
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        var obrazok;
+        if (this.zapnuty) obrazok = zvuk_off;
+        else obrazok = zvuk_on;
+        ctx.drawImage(obrazok, this.x, this.y);
+    }
+    zvuk.onclick = function() {
+        this.zapnuty = !this.zapnuty;
+        this.draw_self();
+    }
+    menu_scena.clickables.push(zvuk);
+
     for (i in menu_scena.clickables) {
         menu_scena.clickables[i].draw_self();
     }
