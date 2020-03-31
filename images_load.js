@@ -12,3 +12,6 @@ jablko.src = './graphics/jabko.png';
 
 var tabletka = new Image();
 tabletka.src = './graphics/powerup.png';
+
+var logo = new Image();
+logo.src = './graphics/logo.png'
