@@ -8,6 +8,9 @@ class Button {
     }
     draw_self = function() {
         ctx.strokeRect(this.x, this.y, this.width, this.height);
+        ctx.textAlign = "center";
+        ctx.font = "30px Calibri";
+        ctx.fillText(this.text, this.x + this.width / 2, this.y + (this.height + 15) / 2);
     }
     onclick = function() {
         alert(this.text);
@@ -28,11 +31,10 @@ menu_scena.onclick = function(point) {
 //Inicializuje a vykresli menu
 function menu() {
 
-    menu_scena.clickables.push(new Button ("Spustit hru", canvas.width / 2 - 100, 50, 200, 50));
-    menu_scena.clickables.push(new Button ("Instrukcie", canvas.width / 2 - 100, 150, 200, 50));
-    menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 250, 200, 50));
+    menu_scena.clickables.push(new Button ("Spustit hru", canvas.width / 2 - 100, 250, 200, 50));
+    menu_scena.clickables.push(new Button ("Instrukcie", canvas.width / 2 - 100, 350, 200, 50));
+    menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 450, 200, 50));
     for (i in menu_scena.clickables) {
         menu_scena.clickables[i].draw_self();
-        console.log(i);
     }
 }
