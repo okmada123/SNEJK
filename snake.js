@@ -1,4 +1,4 @@
-var snake = {}
+var snake = {};
 snake.telo = [];
 snake.draw = function() {
     for (i = 1; i < this.telo.length; i++) {

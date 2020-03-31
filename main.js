@@ -1,10 +1,10 @@
 var canvas;
 var ctx;
-const POSUN = 10;
+const POSUN = 20;
 const DEFAULT_DLZKA_HADA = 20;
 const FPS = 10;
 var posun_x = 0;
-var posun_y = 2*POSUN;
+var posun_y = POSUN;
 var keys = [];
 var tick = 0;
 var skore = 0;
@@ -23,17 +23,17 @@ window.onload = function() {
     
     //innicializacia tela hada
     for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
-        snake.telo.push(new suradnice(100 + i * 2*POSUN, 110));
+        snake.telo.push(new suradnice(100 + i * POSUN, 110));
     }
 
     //umiestnenie jedla na nahodne suradnice.
     jedlo.x = Math.floor(Math.random() * canvas.width);
     jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
     
-    setInterval(step, 1000 / FPS);
+    setInterval(mainloop, 1000 / FPS);
 }
 
-function step() {  
+function mainloop() {  
     tick++;  
     zmena_smeru();
     snake.move();
@@ -54,18 +54,8 @@ function step() {
         posun_y *= -1;
     }
     
-    //toto tu potom nebude v takej podobe. nove jedlo sa bude generovat po zjedeni predosleho
     if (!(tick % FPS)) {
         skore++;
-        // if (!(tick % (5*FPS))) {
-        //     jedlo_update();
-        //     if (Math.floor((Math.random() * 100)) <= 25) {
-        //         powerup = 1;
-        //     }
-        //     else powerup = 0;
-        //     //toto jedenie tu potom nebude
-        //     snake.zjedenie();
-        // }
     }
     
     render();
@@ -175,7 +165,7 @@ function zmena_smeru() {
         //kontrola, ci nejdeme dole
         if (!(posun_y > 0)) {
             posun_x = 0;
-            posun_y = -2*POSUN;
+            posun_y = -POSUN;
         }
     }
     //dole
@@ -183,21 +173,21 @@ function zmena_smeru() {
         //kontrola, ci nejdeme hore
         if (!(posun_y < 0)) {
             posun_x = 0;
-            posun_y = 2*POSUN;
+            posun_y = POSUN;
         }
     }
     //doprava
     if (keys[39]) {
         //kontrola, ci nejdeme dolava
         if (!(posun_x < 0)) {
-            posun_x = 2*POSUN;
+            posun_x = POSUN;
             posun_y = 0;
         }
     }
     if (keys[37]) {
         //kontrola, ci nejdeme doprava
         if (!(posun_x > 0)) {
-            posun_x = -2*POSUN;
+            posun_x = -POSUN;
             posun_y = 0;
         }
     }
