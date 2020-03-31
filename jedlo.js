@@ -14,7 +14,7 @@ jedlo.draw = function() {
 jedlo.update = function() {
     this.x = Math.floor(Math.random() * canvas.width);
     this.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
-    if (Math.floor((Math.random() * 100)) <= 50) {
+    if (Math.floor((Math.random() * 100)) <= SANCA_NA_POWERUP) {
         this.powerup = true;
     }
     else this.powerup = false;
