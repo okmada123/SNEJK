@@ -39,14 +39,7 @@ function mainloop() {
     tick++;  
     zmena_smeru();
     snake.move();
-
-    //po pohybe skontrolovat, ci nezakusol do jedla
-    if (zjedenie_check()) {
-        if (jedlo.powerup) snake.powerup();
-        else snake.zjedenie();
-        jedlo_update();
-        console.log(snake.telo);
-    }
+    zjedenie_check();
     
     //odrazanie od stien, toto potom aj tak nikde nebude
     if (snake.telo[0].x >= canvas.width - POSUN || snake.telo[0].x <= 0 + POSUN) {
@@ -85,6 +78,13 @@ function draw_score_panel() {
 }
 
 function zjedenie_check() {
+    //pomocna funkcia, ktora sa zavola ked sa zakusneme do jablka/powerupu
+    function hit() {
+        if (jedlo.powerup) snake.powerup();
+        else snake.zjedenie();
+        jedlo.update();
+    }
+
     //porovnavame podla toho akym ideme smerom
     if (snake.dy == 0) {
         //ak ideme doprava
@@ -95,8 +95,7 @@ function zjedenie_check() {
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
                     console.log("---------------------------");
-                    //jedlo_update();
-                    return 1;
+                    hit();
                 }
             }
         }
@@ -108,8 +107,7 @@ function zjedenie_check() {
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
                     console.log("---------------------------");
-                    //jedlo_update();
-                    return 1;
+                    hit();
                 }
             }
         }
@@ -123,8 +121,7 @@ function zjedenie_check() {
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
                     console.log("---------------------------");
-                    //jedlo_update();
-                    return 1;
+                    hit();
                 }
             }
         }
@@ -136,21 +133,11 @@ function zjedenie_check() {
                     console.log("Hlava hada: " + snake.telo[0].x + "," + snake.telo[0].y);
                     console.log("Jedlo: " + jedlo.x + "," + jedlo.y);
                     console.log("---------------------------");
-                    //jedlo_update();
-                    return 1;
+                    hit();
                 }
             }
         }
     }
-}
-
-function jedlo_update() {
-    jedlo.x = Math.floor(Math.random() * canvas.width);
-    jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
-    if (Math.floor((Math.random() * 100)) <= 50) {
-        jedlo.powerup = true;
-    }
-    else jedlo.powerup = false;
 }
 
 //key presses

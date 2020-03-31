@@ -11,3 +11,11 @@ jedlo.draw = function() {
         ctx.drawImage(jablko, this.x - 25, this.y - 25);
     }
 }
+jedlo.update = function() {
+    this.x = Math.floor(Math.random() * canvas.width);
+    this.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
+    if (Math.floor((Math.random() * 100)) <= 50) {
+        this.powerup = true;
+    }
+    else this.powerup = false;
+}
