@@ -12,7 +12,7 @@ function start_game() {
     scena = 0;
      //innicializacia tela hada
      for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
-        snake.telo.push(new Suradnice(100 + i * POSUN, 110));
+        snake.telo.push(new Suradnice(240 + i * POSUN, 110));
     }
 
     //defaultne nastavenie smeru pohybu hada
@@ -43,6 +43,7 @@ function mainloop() {
     
     if (!(tick % FPS)) {
         skore++;
+        console.log(snake.telo[0]);
     }
     
     render();
@@ -57,6 +58,7 @@ function render() {
     jedlo.draw();
     snake.draw(); 
     draw_score_panel();
+    draw_border();
 }
 
 function draw_score_panel() {
@@ -67,6 +69,15 @@ function draw_score_panel() {
     ctx.closePath();
     ctx.font = "30px Arial"
     ctx.fillText("Skore: " + skore, 10, 30);
+}
+
+function draw_border() {
+    ctx.save();
+    ctx.fillRect(0, 50, 25, canvas.height - 50);
+    ctx.fillRect(canvas.width - 25, 50, 25, canvas.height - 50);
+    ctx.fillRect(0, canvas.height-25, canvas.width, 25);
+    ctx.fillRect(0, 50, canvas.width, 25);
+    ctx.restore();
 }
 
 function zjedenie_check() {
@@ -115,14 +126,6 @@ function zjedenie_check() {
         }
     }
 }
-
-// //key presses
-// window.onkeydown = function(event) {
-//     if (!keys[event.keyCode]) {
-//         keys[event.keyCode] = true;
-//         //console.log(event.keyCode);
-//     }
-// }
 
 function zmena_smeru() {
     //hore
