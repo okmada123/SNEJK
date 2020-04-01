@@ -1,9 +1,11 @@
 var snake = {};
 snake.telo = [];
 snake.draw = function() {
+    //vykreslenie tela
     for (i = 1; i < this.telo.length; i++) {
         ctx.drawImage(body, this.telo[i].x-15, this.telo[i].y-15);
     }
+
     //vykreslenie hlavy
     //ak ideme smerom dolava
     if (this.dx < 0 && this.dy == 0) {
@@ -34,12 +36,13 @@ snake.draw = function() {
         ctx.restore();
     }
 }
-snake.move = function() {
+snake.move = function() {        
     //vsetky okrem hlavy sa poposuvaju v poli
     for (i = this.telo.length - 1; i > 0; i--) {
         this.telo[i].x = this.telo[i-1].x;
         this.telo[i].y = this.telo[i-1].y;
     }
+
     //hlava sa posunie v smere posunu
     this.telo[0].x += this.dx;
     this.telo[0].y += this.dy;

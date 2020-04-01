@@ -27,7 +27,7 @@ function start_game() {
     timer = setInterval(mainloop, 1000 / FPS);
 }
 
-function mainloop() {  
+function mainloop() {
     tick++;  
     zmena_smeru(); //key press handle
     snake.move(); //posunutie hada
@@ -36,14 +36,14 @@ function mainloop() {
     //potom sa vsetko vykresli
     render();
     
-    //game_over_check() - TODO
+    game_over_check();
     
     //odrazanie od stien, toto potom aj tak nikde nebude
-    if (snake.telo[0].x + 15 > canvas.width - 25 || snake.telo[0].x - 15 < 0 + 25 || snake.telo[0].y + 15 > canvas.height - 25 || snake.telo[0].y - 15 < 50 + 25) {
-        timer = clearInterval(timer);
-        snake.telo.length = 0;
-        menu();
-    }
+    // if (snake.telo[0].x + 15 > canvas.width - 25 || snake.telo[0].x - 15 < 0 + 25 || snake.telo[0].y + 15 > canvas.height - 25 || snake.telo[0].y - 15 < 50 + 25) {
+    //     timer = clearInterval(timer);
+    //     snake.telo.length = 0;
+    //     menu();
+    // }
 }
 
 function render() {
@@ -161,4 +161,22 @@ function zmena_smeru() {
     keys[38] = false;
     keys[39] = false;
     keys[40] = false;
+}
+
+function game_over_check() {
+    for (i = 1; i < snake.telo.length; i++) {
+        if (snake.telo[i].x == snake.telo[0].x && snake.telo[i].y == snake.telo[0].y) {
+            game_over();
+            return;
+        }
+    }
+    if (snake.telo[0].x + 15 > canvas.width - 25 || snake.telo[0].x - 15 < 0 + 25 || snake.telo[0].y + 15 > canvas.height - 25 || snake.telo[0].y - 15 < 50 + 25) {
+        game_over();
+    }
+}
+
+function game_over() {
+    timer = clearInterval(timer);
+    snake.telo.length = 0;
+    menu();
 }
