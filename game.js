@@ -29,17 +29,15 @@ function start_game() {
 
 function mainloop() {  
     tick++;  
-    zmena_smeru();
-    snake.move();
-    zjedenie_check();
+    zmena_smeru(); //key press handle
+    snake.move(); //posunutie hada
+    zjedenie_check(); //kontrola zjedenia jedla
     
-    
-    if (!(tick % FPS)) {
-        skore++;
-    }
-    
+    //potom sa vsetko vykresli
     render();
-
+    
+    //game_over_check() - TODO
+    
     //odrazanie od stien, toto potom aj tak nikde nebude
     if (snake.telo[0].x + 15 > canvas.width - 25 || snake.telo[0].x - 15 < 0 + 25 || snake.telo[0].y + 15 > canvas.height - 25 || snake.telo[0].y - 15 < 50 + 25) {
         timer = clearInterval(timer);

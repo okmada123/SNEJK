@@ -46,9 +46,11 @@ snake.move = function() {
 }
 snake.zjedenie = function() {
     this.telo.push(new Suradnice(this.telo[this.telo.length - 1].x, this.telo[this.telo.length - 1].y));
+    skore += 10;
 }
 snake.powerup = function() {    
     for (i = 0; i < 5 && this.telo.length > 3; i++) {
         this.telo.pop();
     }
+    skore += 50;
 }
