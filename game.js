@@ -33,20 +33,19 @@ function mainloop() {
     snake.move();
     zjedenie_check();
     
-    //odrazanie od stien, toto potom aj tak nikde nebude
-    if (snake.telo[0].x >= canvas.width - POSUN || snake.telo[0].x <= 0 + POSUN) {
-        snake.dx *= -1;
-    }
-    else if (snake.telo[0].y >= canvas.height - POSUN || snake.telo[0].y <= 50 + POSUN) {
-        snake.dy *= -1;
-    }
     
     if (!(tick % FPS)) {
         skore++;
-        console.log(snake.telo[0]);
     }
     
     render();
+
+    //odrazanie od stien, toto potom aj tak nikde nebude
+    if (snake.telo[0].x + 15 > canvas.width - 25 || snake.telo[0].x - 15 < 0 + 25 || snake.telo[0].y + 15 > canvas.height - 25 || snake.telo[0].y - 15 < 50 + 25) {
+        timer = clearInterval(timer);
+        snake.telo.length = 0;
+        menu();
+    }
 }
 
 function render() {
@@ -55,10 +54,10 @@ function render() {
     ctx.drawImage(background, 0, 49);
     
     //vykreslenie objektov
-    jedlo.draw();
-    snake.draw(); 
     draw_score_panel();
     draw_border();
+    jedlo.draw();
+    snake.draw(); 
 }
 
 function draw_score_panel() {
@@ -73,6 +72,7 @@ function draw_score_panel() {
 
 function draw_border() {
     ctx.save();
+    ctx.fillStyle = "brown";
     ctx.fillRect(0, 50, 25, canvas.height - 50);
     ctx.fillRect(canvas.width - 25, 50, 25, canvas.height - 50);
     ctx.fillRect(0, canvas.height-25, canvas.width, 25);

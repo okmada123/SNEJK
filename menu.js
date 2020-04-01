@@ -33,7 +33,8 @@ menu_scena.onclick = function(point) {
 }
 
 //Inicializuje a vykresli menu
-function menu() {
+function menu() {    
+    console.log(menu_scena.clickables);
     scena = 1;
     ctx.save();
     ctx.fillStyle = "yellow";
@@ -42,11 +43,14 @@ function menu() {
     //buttons
     menu_scena.clickables.push(new Button ("Spustit hru", canvas.width / 2 - 100, 250, 200, 50));
     menu_scena.clickables[0].onclick = function() {
+        // var pocet_buttonov = menu_scena.clickables.length;
+        // for (i = 0; i < pocet_buttonov; i++)        
         start_game();
+        menu_scena.clickables.length = 0;
     }
     menu_scena.clickables.push(new Button ("Instrukcie", canvas.width / 2 - 100, 350, 200, 50));
     menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 450, 200, 50));
-
+    
     //zvuk button
     var zvuk = new Button ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
     zvuk.zapnuty = true;
@@ -65,9 +69,10 @@ function menu() {
         this.draw_self();
     }
     menu_scena.clickables.push(zvuk);
-
+    
     for (i in menu_scena.clickables) {
         menu_scena.clickables[i].draw_self();
     }
     ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
+    console.log(menu_scena.clickables);
 }
