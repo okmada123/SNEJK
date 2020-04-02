@@ -11,7 +11,12 @@ game_over_scena.onclick = function(point) {
 
 game_over_scena.onkeydown = function(key) {
     var znak = String.fromCharCode(key);
-    alert(znak);
+    for (i in this.clickables) {
+        var aktualny = this.clickables[i];
+        if (typeof(aktualny.onkeydown) == "function") {
+            aktualny.onkeydown(znak);
+        }
+    }
 }
 
 function game_over_render() {
@@ -31,7 +36,44 @@ function game_over_render() {
         menu();
     }
 
+    //vytvorenie textoveho pola
     var textfield = new Button("asdasdas", canvas.width / 2 - 100, canvas.height / 2 - 20, 200, 50);
+    textfield.focus = false;
+    
+    textfield.draw_self = function() {
+        if (this.focus) {
+            ctx.save();
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.font = "30px Calibri";
+            ctx.fillText(this.text, this.x + this.width / 2, this.y + (this.height + 15) / 2);
+            ctx.restore();
+        }
+        else {
+            ctx.save();
+            ctx.fillStyle = "gray";
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.font = "30px Calibri";
+            ctx.fillText(this.text, this.x + this.width / 2, this.y + (this.height + 15) / 2);
+            ctx.restore();
+        }
+    }
+
+    textfield.onclick = function() {
+        this.focus = !this.focus;
+        this.draw_self();
+    }
+
+    textfield.onkeydown = function(znak) {
+        if (this.focus) {
+            alert(znak);
+        }
+    }
+
     game_over_scena.clickables.push(textfield);
 
     //render buttonov
