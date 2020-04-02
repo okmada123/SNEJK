@@ -14,10 +14,13 @@ var tabletka = new Image();
 tabletka.src = './graphics/powerup.png';
 
 var logo = new Image();
-logo.src = './graphics/logo.png'
+logo.src = './graphics/logo.png';
 
 var zvuk_on = new Image();
 zvuk_on.src = './graphics/nota.png';
 
 var zvuk_off = new Image();
-zvuk_off.src = './graphics/nota_off.png'
+zvuk_off.src = './graphics/nota_off.png';
+
+var sipky = new Image();
+sipky.src = './graphics/sipky.png';
