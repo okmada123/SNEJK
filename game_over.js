@@ -26,7 +26,14 @@ function game_over_render() {
         menu();
     }
 
+    //render buttonov
     for (i in game_over_scena.clickables) {
         game_over_scena.clickables[i].draw_self();
     }
+
+    ctx.save();
+    ctx.font = "30px Calibri";
+    ctx.textAlign = "center";
+    ctx.fillText("Dosiahol si skore: " + skore, canvas.width / 2, canvas.height / 2 - 50);
+    ctx.restore();
 }
