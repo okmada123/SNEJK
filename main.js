@@ -1,6 +1,6 @@
 var canvas;
 var ctx;
-var scena;  // 0 = game,  1 = menu,  2 = instructions
+var scena;  // 0 = game,  1 = menu,  2 = instructions,  3 = gameover_scena
 
 
 window.onload = function() {

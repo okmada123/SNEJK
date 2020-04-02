@@ -176,6 +176,7 @@ function game_over_check() {
 function game_over() {
     timer = clearInterval(timer);
     snake.telo.length = 0;
-    alert("KONEC HRI! Dosiahnute skore: " + skore + "\nTeraz sa vratis do menu, ty babrak.");
-    menu();
+    //alert("KONEC HRI! Dosiahnute skore: " + skore + "\nTeraz sa vratis do menu, ty babrak.");
+    game_over_render();
+    //menu();
 }

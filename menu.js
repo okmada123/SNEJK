@@ -1,7 +1,7 @@
 var menu_scena = {}
 menu_scena.clickables = [];
 menu_scena.onclick = function(point) {
-    for (i in menu_scena.clickables) {
+    for (i in this.clickables) {
         var aktualny = this.clickables[i];    
         if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
             aktualny.onclick();
