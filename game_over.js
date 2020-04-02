@@ -9,6 +9,11 @@ game_over_scena.onclick = function(point) {
     }
 }
 
+game_over_scena.onkeydown = function(key) {
+    var znak = String.fromCharCode(key);
+    alert(znak);
+}
+
 function game_over_render() {
     scena = 3;
     ctx.save();
@@ -25,6 +30,9 @@ function game_over_render() {
         game_over_scena.clickables.length = 0;
         menu();
     }
+
+    var textfield = new Button("asdasdas", canvas.width / 2 - 100, canvas.height / 2 - 20, 200, 50);
+    game_over_scena.clickables.push(textfield);
 
     //render buttonov
     for (i in game_over_scena.clickables) {
