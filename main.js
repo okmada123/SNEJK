@@ -1,20 +1,13 @@
 var canvas;
 var ctx;
-var scena;  // 0 = hra,  1 = menu
+var scena;  // 0 = game,  1 = menu,  2 = instructions
 
-class Suradnice {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 window.onload = function() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
     
     menu();
-    //start_game();
 }
 
 //key presses handler
@@ -33,4 +26,34 @@ window.onclick = function(event) {
     //switch case na scenu...
     if (scena == 1) menu_scena.onclick(point);
     else console.log(point);
+}
+
+class Suradnice {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+class Button {
+    constructor(text, x, y, width, height) {
+        this.text = text;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height; 
+    }
+    draw_self = function() {
+        ctx.save();
+        ctx.fillStyle = "gray";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.font = "30px Calibri";
+        ctx.fillText(this.text, this.x + this.width / 2, this.y + (this.height + 15) / 2);
+        ctx.restore();
+    }
+    onclick = function() {
+        alert(this.text);
+    }
 }

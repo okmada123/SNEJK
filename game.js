@@ -4,12 +4,14 @@ const FPS = 10;
 const SANCA_NA_POWERUP = 20;
 var keys = [];
 var tick = 0;
-var skore = 0;
+var skore;
 var timer;
 
-
+//vsetky kroky potrebne pre zacatie hry
 function start_game() {
     scena = 0;
+    skore = 0;
+
      //innicializacia tela hada
      for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
         snake.telo.push(new Suradnice(240 + i * POSUN, 110));
@@ -37,13 +39,6 @@ function mainloop() {
     render();
     
     game_over_check();
-    
-    //odrazanie od stien, toto potom aj tak nikde nebude
-    // if (snake.telo[0].x + 15 > canvas.width - 25 || snake.telo[0].x - 15 < 0 + 25 || snake.telo[0].y + 15 > canvas.height - 25 || snake.telo[0].y - 15 < 50 + 25) {
-    //     timer = clearInterval(timer);
-    //     snake.telo.length = 0;
-    //     menu();
-    // }
 }
 
 function render() {
@@ -164,12 +159,15 @@ function zmena_smeru() {
 }
 
 function game_over_check() {
+    //kontrola ci sme sa nezakusli do seba
     for (i = 1; i < snake.telo.length; i++) {
         if (snake.telo[i].x == snake.telo[0].x && snake.telo[i].y == snake.telo[0].y) {
             game_over();
             return;
         }
     }
+    
+    //kontrola, ci had nenarazil do steny
     if (snake.telo[0].x + 15 > canvas.width - 25 || snake.telo[0].x - 15 < 0 + 25 || snake.telo[0].y + 15 > canvas.height - 25 || snake.telo[0].y - 15 < 50 + 25) {
         game_over();
     }
@@ -178,5 +176,6 @@ function game_over_check() {
 function game_over() {
     timer = clearInterval(timer);
     snake.telo.length = 0;
+    alert("KONEC HRI! Dosiahnute skore: " + skore + "\nTeraz sa vratis do menu, ty babrak.");
     menu();
 }
