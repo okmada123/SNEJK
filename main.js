@@ -24,8 +24,18 @@ window.onclick = function(event) {
     var y = event.pageY - canvas.offsetTop;
     var point = new Suradnice(x, y);
     //switch case na scenu...
-    if (scena == 1) menu_scena.onclick(point);
-    else console.log(point);
+    // if (scena == 1) menu_scena.onclick(point);
+    // else console.log(point);
+    switch(scena) {
+        case 0:
+            break;
+        case 1:
+            menu_scena.onclick(point);
+            break;
+        case 2:
+            instructions_scena.onclick(point);
+            break;
+    }
 }
 
 class Suradnice {
