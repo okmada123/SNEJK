@@ -1,7 +1,7 @@
 const POSUN = 20;
 const DEFAULT_DLZKA_HADA = 20;
 const FPS = 10;
-const SANCA_NA_POWERUP = 100;
+const SANCA_NA_POWERUP = 10;
 var keys = [];
 var tick = 0;
 var skore;
