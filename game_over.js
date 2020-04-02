@@ -9,6 +9,16 @@ game_over_scena.onclick = function(point) {
     }
 }
 
+game_over_scena.onkeydown = function(key) {
+    //var znak = String.fromCharCode(key);
+    for (i in this.clickables) {
+        var aktualny = this.clickables[i];
+        if (typeof(aktualny.onkeydown) == "function") {
+            aktualny.onkeydown(key);
+        }
+    }
+}
+
 function game_over_render() {
     scena = 3;
     ctx.save();
@@ -25,6 +35,56 @@ function game_over_render() {
         game_over_scena.clickables.length = 0;
         menu();
     }
+
+    //vytvorenie textoveho pola
+    var textfield = new Button("Meno", canvas.width / 2 - 100, canvas.height / 2 - 20, 200, 50);
+    textfield.focus = false;
+    
+    textfield.draw_self = function() {
+        if (this.focus) {
+            ctx.save();
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.font = "30px Calibri";
+            ctx.fillText(this.text + "_", this.x + this.width / 2, this.y + (this.height + 15) / 2);
+            ctx.restore();
+        }
+        else {
+            ctx.save();
+            ctx.fillStyle = "gray";
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.fillStyle = "black";
+            ctx.textAlign = "center";
+            ctx.font = "30px Calibri";
+            ctx.fillText(this.text + "_", this.x + this.width / 2, this.y + (this.height + 15) / 2);
+            ctx.restore();
+        }
+    }
+
+    textfield.onclick = function() {
+        this.focus = !this.focus;
+        this.draw_self();
+    }
+
+    textfield.onkeydown = function(key) {
+        if (this.focus) {
+            if (key == 8) {
+                this.text = this.text.substring(0, this.text.length - 1);
+            }
+            else if (key == 13) {
+                alert(this.text);
+            }
+            else {
+                var znak = String.fromCharCode(key);
+                this.text = this.text + znak;
+            }
+            this.draw_self();
+        }
+    }
+
+    game_over_scena.clickables.push(textfield);
 
     //render buttonov
     for (i in game_over_scena.clickables) {

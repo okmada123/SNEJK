@@ -12,9 +12,17 @@ window.onload = function() {
 
 //key presses handler
 window.onkeydown = function(event) {
-    if (!keys[event.keyCode]) {
-        keys[event.keyCode] = true;
-        //console.log(event.keyCode);
+    if (scena == 0) {
+        if (!keys[event.keyCode]) {
+            keys[event.keyCode] = true;
+            //console.log(event.keyCode);
+        }
+    }
+    // else if (scena = 1) {
+    //     menu_scena.onkeydown(event.keyCode);
+    // }
+    else if (scena == 3) {
+        game_over_scena.onkeydown(event.keyCode);
     }
 }
 
