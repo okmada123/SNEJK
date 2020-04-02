@@ -10,11 +10,11 @@ game_over_scena.onclick = function(point) {
 }
 
 game_over_scena.onkeydown = function(key) {
-    var znak = String.fromCharCode(key);
+    //var znak = String.fromCharCode(key);
     for (i in this.clickables) {
         var aktualny = this.clickables[i];
         if (typeof(aktualny.onkeydown) == "function") {
-            aktualny.onkeydown(znak);
+            aktualny.onkeydown(key);
         }
     }
 }
@@ -37,7 +37,7 @@ function game_over_render() {
     }
 
     //vytvorenie textoveho pola
-    var textfield = new Button("asdasdas", canvas.width / 2 - 100, canvas.height / 2 - 20, 200, 50);
+    var textfield = new Button("Meno", canvas.width / 2 - 100, canvas.height / 2 - 20, 200, 50);
     textfield.focus = false;
     
     textfield.draw_self = function() {
@@ -48,7 +48,7 @@ function game_over_render() {
             ctx.fillStyle = "black";
             ctx.textAlign = "center";
             ctx.font = "30px Calibri";
-            ctx.fillText(this.text, this.x + this.width / 2, this.y + (this.height + 15) / 2);
+            ctx.fillText(this.text + "_", this.x + this.width / 2, this.y + (this.height + 15) / 2);
             ctx.restore();
         }
         else {
@@ -58,7 +58,7 @@ function game_over_render() {
             ctx.fillStyle = "black";
             ctx.textAlign = "center";
             ctx.font = "30px Calibri";
-            ctx.fillText(this.text, this.x + this.width / 2, this.y + (this.height + 15) / 2);
+            ctx.fillText(this.text + "_", this.x + this.width / 2, this.y + (this.height + 15) / 2);
             ctx.restore();
         }
     }
@@ -68,9 +68,19 @@ function game_over_render() {
         this.draw_self();
     }
 
-    textfield.onkeydown = function(znak) {
+    textfield.onkeydown = function(key) {
         if (this.focus) {
-            alert(znak);
+            if (key == 8) {
+                this.text = this.text.substring(0, this.text.length - 1);
+            }
+            else if (key == 13) {
+                alert(this.text);
+            }
+            else {
+                var znak = String.fromCharCode(key);
+                this.text = this.text + znak;
+            }
+            this.draw_self();
         }
     }
 
