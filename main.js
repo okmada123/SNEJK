@@ -35,6 +35,9 @@ window.onclick = function(event) {
         case 2:
             instructions_scena.onclick(point);
             break;
+        case 3:
+            game_over_scena.onclick(point);
+            break;
     }
 }
 

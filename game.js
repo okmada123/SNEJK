@@ -54,6 +54,7 @@ function render() {
 }
 
 function draw_score_panel() {
+    console.log(skore);
     ctx.beginPath();
     ctx.moveTo(0, 50);
     ctx.lineTo(canvas.width, 50);
