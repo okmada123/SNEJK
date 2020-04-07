@@ -3,13 +3,15 @@ var ctx;
 var scena;  // 0 = game,  1 = menu,  2 = instructions,  3 = gameover_scena
 var zvuk;
 
+var hudba_gitara;
 
 window.onload = function() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
     zvuk = new Zvuk ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
-    console.log(zvuk.x);
-    console.log(zvuk.y);
+    
+    hudba_gitara = document.getElementById("gitara");
+    //hudba_gitara.play();
     
     menu();
 }
@@ -86,7 +88,7 @@ class Button {
 class Zvuk extends Button {
     constructor(text, x, y, width, height) {
         super(text, x, y, width, height);
-        this.zapnuty = true;
+        this.zapnuty = false;
     }
     draw_self = function() {
         ctx.save();
@@ -94,12 +96,15 @@ class Zvuk extends Button {
         ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.restore();
         var obrazok;
-        if (this.zapnuty) obrazok = zvuk_off;
+        if (!this.zapnuty) obrazok = zvuk_off;
         else obrazok = zvuk_on;
         ctx.drawImage(obrazok, this.x, this.y);
     }
     onclick = function() {
         this.zapnuty = !this.zapnuty;
+        if (this.zapnuty) {
+            hudba_gitara.play();
+        }
         this.draw_self();
     }
 }
