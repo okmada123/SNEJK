@@ -10,8 +10,12 @@
                 border: solid 1px black;
                 background-color: white;
             }
+            audio {
+                visibility: hidden;
+            }
         </style>
         <script src="images_load.js"></script>
+        <script src="zvuky.js"></script>
         <script src="snake.js"></script>
         <script src="jedlo.js"></script>
         <script src="game.js"></script>
@@ -22,5 +26,10 @@
     </head>
     <body>
         <canvas id="canvas" width="800" height="650"></canvas>
+
+        <audio id="gitara" src="sounds/michal_gitara.mp3" controls></audio>
+        <audio id="powerup" src="sounds/powerup.mp3" controls></audio>
+        <audio id="zjedenie" src="sounds/zjedenie.mp3" controls></audio>
+        <audio id="smrt" src="sounds/smrt.mp3" controls></audio>
     </body>
 </html>

@@ -1,11 +1,16 @@
 var canvas;
 var ctx;
 var scena;  // 0 = game,  1 = menu,  2 = instructions,  3 = gameover_scena
+var zvuk;
 
 
 window.onload = function() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
+    zvuk = new Zvuk ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
+    
+    //nacitanie zvukov
+    load_sounds();
     
     menu();
 }
@@ -36,6 +41,7 @@ window.onclick = function(event) {
     // else console.log(point);
     switch(scena) {
         case 0:
+            game_scena.onclick(point);
             break;
         case 1:
             menu_scena.onclick(point);
@@ -76,5 +82,27 @@ class Button {
     }
     onclick = function() {
         alert(this.text);
+    }
+}
+
+class Zvuk extends Button {
+    constructor(text, x, y, width, height) {
+        super(text, x, y, width, height);
+        this.zapnuty = true;
+    }
+    draw_self = function() {
+        ctx.save();
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.restore();
+        var obrazok;
+        if (!this.zapnuty) obrazok = zvuk_off;
+        else obrazok = zvuk_on;
+        ctx.drawImage(obrazok, this.x, this.y);
+    }
+    onclick = function() {
+        this.zapnuty = !this.zapnuty;
+        zvuk_gitara.muted = !zvuk_gitara.muted;
+        this.draw_self();
     }
 }
