@@ -78,3 +78,24 @@ class Button {
         alert(this.text);
     }
 }
+
+class Zvuk extends Button {
+    constructor() {
+        super(text, x, y, width, height);
+        this.zapnuty = true;
+    }
+    draw_self = function() {
+        ctx.save();
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.restore();
+        var obrazok;
+        if (this.zapnuty) obrazok = zvuk_off;
+        else obrazok = zvuk_on;
+        ctx.drawImage(obrazok, this.x, this.y);
+    }
+    onclick = function() {
+        this.zapnuty = !this.zapnuty;
+        this.draw_self();
+    }
+}
