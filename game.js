@@ -7,8 +7,20 @@ var tick = 0;
 var skore;
 var timer;
 
+var game_scena = {};
+game_scena.clickables = [];
+game_scena.onclick = function(point) {
+    for (i in this.clickables) {
+        var aktualny = this.clickables[i];
+        if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
+            aktualny.onclick();
+        }
+    }
+}
+
 //vsetky kroky potrebne pre zacatie hry
 function start_game() {
+    game_scena.clickables.push(zvuk);
     zvuk_gitara.play();
     scena = 0;
     skore = 0;
@@ -51,7 +63,10 @@ function render() {
     draw_score_panel();
     draw_border();
     jedlo.draw();
-    snake.draw(); 
+    snake.draw();
+    for (i in game_scena.clickables) {
+        game_scena.clickables[i].draw_self();
+    }
 }
 
 function draw_score_panel() {

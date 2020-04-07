@@ -85,6 +85,7 @@ function game_over_render() {
     }
 
     game_over_scena.clickables.push(textfield);
+    game_over_scena.clickables.push(zvuk);
 
     //render buttonov
     for (i in game_over_scena.clickables) {

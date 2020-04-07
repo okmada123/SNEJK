@@ -41,6 +41,7 @@ window.onclick = function(event) {
     // else console.log(point);
     switch(scena) {
         case 0:
+            game_scena.onclick(point);
             break;
         case 1:
             menu_scena.onclick(point);

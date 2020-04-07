@@ -1,4 +1,4 @@
-var menu_scena = {}
+var menu_scena = {};
 menu_scena.clickables = [];
 menu_scena.onclick = function(point) {
     for (i in this.clickables) {
