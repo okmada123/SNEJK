@@ -87,7 +87,7 @@ class Button {
 class Zvuk extends Button {
     constructor(text, x, y, width, height) {
         super(text, x, y, width, height);
-        this.zapnuty = false;
+        this.zapnuty = true;
     }
     draw_self = function() {
         ctx.save();
@@ -101,9 +101,7 @@ class Zvuk extends Button {
     }
     onclick = function() {
         this.zapnuty = !this.zapnuty;
-        if (this.zapnuty) {
-            zvuk_gitara.play();
-        }
+        zvuk_gitara.muted = !zvuk_gitara.muted;
         this.draw_self();
     }
 }

@@ -9,6 +9,7 @@ var timer;
 
 //vsetky kroky potrebne pre zacatie hry
 function start_game() {
+    zvuk_gitara.play();
     scena = 0;
     skore = 0;
 
@@ -177,6 +178,9 @@ function game_over() {
     timer = clearInterval(timer);
     snake.telo.length = 0;
     //alert("KONEC HRI! Dosiahnute skore: " + skore + "\nTeraz sa vratis do menu, ty babrak.");
+    if (zvuk.zapnuty) {
+        zvuk_smrt.play();
+    }
     game_over_render();
     //menu();
 }
