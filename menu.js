@@ -37,22 +37,22 @@ function menu() {
     menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 450, 200, 50));
     
     //zvuk
-    var zvuk = new Button ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
-    zvuk.zapnuty = true;
-    zvuk.draw_self = function() {
-        ctx.save();
-        ctx.fillStyle = "yellow";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.restore();
-        var obrazok;
-        if (this.zapnuty) obrazok = zvuk_off;
-        else obrazok = zvuk_on;
-        ctx.drawImage(obrazok, this.x, this.y);
-    }
-    zvuk.onclick = function() {
-        this.zapnuty = !this.zapnuty;
-        this.draw_self();
-    }
+    // var zvuk = new Button ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
+    // zvuk.zapnuty = true;
+    // zvuk.draw_self = function() {
+    //     ctx.save();
+    //     ctx.fillStyle = "yellow";
+    //     ctx.fillRect(this.x, this.y, this.width, this.height);
+    //     ctx.restore();
+    //     var obrazok;
+    //     if (this.zapnuty) obrazok = zvuk_off;
+    //     else obrazok = zvuk_on;
+    //     ctx.drawImage(obrazok, this.x, this.y);
+    // }
+    // zvuk.onclick = function() {
+    //     this.zapnuty = !this.zapnuty;
+    //     this.draw_self();
+    // }
     menu_scena.clickables.push(zvuk);
     
     for (i in menu_scena.clickables) {

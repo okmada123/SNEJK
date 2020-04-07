@@ -1,11 +1,15 @@
 var canvas;
 var ctx;
 var scena;  // 0 = game,  1 = menu,  2 = instructions,  3 = gameover_scena
+var zvuk;
 
 
 window.onload = function() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
+    zvuk = new Zvuk ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
+    console.log(zvuk.x);
+    console.log(zvuk.y);
     
     menu();
 }
@@ -80,7 +84,7 @@ class Button {
 }
 
 class Zvuk extends Button {
-    constructor() {
+    constructor(text, x, y, width, height) {
         super(text, x, y, width, height);
         this.zapnuty = true;
     }
