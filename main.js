@@ -17,6 +17,7 @@ window.onload = function() {
 
 //key presses handler
 window.onkeydown = function(event) {
+    event.preventDefault();
     if (scena == 0) {
         if (!keys[event.keyCode]) {
             keys[event.keyCode] = true;
