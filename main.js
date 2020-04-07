@@ -3,15 +3,14 @@ var ctx;
 var scena;  // 0 = game,  1 = menu,  2 = instructions,  3 = gameover_scena
 var zvuk;
 
-var hudba_gitara;
 
 window.onload = function() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
     zvuk = new Zvuk ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
     
-    hudba_gitara = document.getElementById("gitara");
-    //hudba_gitara.play();
+    //nacitanie zvukov
+    load_sounds();
     
     menu();
 }
@@ -103,7 +102,7 @@ class Zvuk extends Button {
     onclick = function() {
         this.zapnuty = !this.zapnuty;
         if (this.zapnuty) {
-            hudba_gitara.play();
+            zvuk_gitara.play();
         }
         this.draw_self();
     }
