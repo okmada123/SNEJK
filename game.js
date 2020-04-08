@@ -36,8 +36,7 @@ function start_game() {
 
     //generovanie prveho jedla
     jedlo.powerup = false;
-    jedlo.x = Math.floor(Math.random() * canvas.width);
-    jedlo.y = Math.floor(Math.random() * (canvas.height - 50)) + 50;
+    jedlo.update();
     
     timer = setInterval(mainloop, 1000 / FPS);
 }
