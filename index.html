@@ -34,7 +34,15 @@
 	<h1 style="color: white;">Ti, co som vam to uz posielal a nejde vam zvuk, skuste kliknut mimo plochy aplikacie (napriklad sem) a dat CTRL + F5</h1>
 	<script>
 		function pomoc() {
-			alert("Skus si zahrat inu hru.");
+            //alert("Skus si zahrat inu hru.");
+            if (localStorage.getItem("score_array") === null) alert("Nemas ulozene ziadne skore.");
+            else {
+                var pole = JSON.parse(localStorage.getItem("score_array"));
+                for (i in pole) {
+                    alert(pole[i][0]);
+                    alert(pole[i][1]);
+                }
+            }
 		}
 	</script>
 	<button onclick=pomoc()>Stale mi to nejde co mam robit ?</button>

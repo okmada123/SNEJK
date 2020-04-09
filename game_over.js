@@ -63,6 +63,20 @@ function game_over_render() {
         }
     }
 
+    textfield.write_score = function() {
+        //otvorit
+        var data;
+        if ((data = JSON.parse(localStorage.getItem("score_array"))) === null) {
+            data = [];
+            data.push([this.text, skore]);
+            localStorage.setItem("score_array", JSON.stringify(data));
+        }
+        else {
+            data.push([this.text, skore]);
+            localStorage.setItem("score_array", JSON.stringify(data));
+        }
+    }
+
     textfield.onclick = function() {
         this.focus = !this.focus;
         this.draw_self();
@@ -70,11 +84,14 @@ function game_over_render() {
 
     textfield.onkeydown = function(key) {
         if (this.focus) {
+            //backspace
             if (key == 8) {
                 this.text = this.text.substring(0, this.text.length - 1);
             }
+            //enter
             else if (key == 13) {
-                alert(this.text);
+                //alert(this.text);
+                this.write_score();
             }
             else {
                 var znak = String.fromCharCode(key);
