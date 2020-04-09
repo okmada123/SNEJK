@@ -79,6 +79,15 @@ function game_over_render() {
         }
         else {
             data.push([this.text, skore]);
+
+            function descending(a, b) {
+                if (a[1] == b[1]) return 0;
+                else if (a[1] < b[1]) return 1;
+                else return -1;
+            }
+
+            data.sort(descending);
+
             localStorage.setItem("score_array", JSON.stringify(data));
         }
     }
