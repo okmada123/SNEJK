@@ -23,21 +23,29 @@ function high_scores() {
     }
     high_scores_scena.clickables.push(spat);
 
+    var zmaz = new Button ("Zmaz historiu", canvas.width - 210, canvas.height - 60, 200, 50);
+    zmaz.onclick = function() {
+        localStorage.clear();
+    }
+    high_scores_scena.clickables.push(zmaz);
+
     for (i in high_scores_scena.clickables) {
         high_scores_scena.clickables[i].draw_self();
     }
 
     //vypisanie ulozenych skore
-    if (localStorage.getItem("score_array") === null) console.log("Nemas ulozene ziadne skore.");
+    if (localStorage.getItem("score_array") === null) alert("Nemas ulozene ziadne skore.");
     else {
         var pole = JSON.parse(localStorage.getItem("score_array"));
         var y = 50;
+        var poradie = 0;
         for (i in pole) {
-            console.log(pole[i]);
+            //console.log(pole[i]);
+            poradie++;
             ctx.save();
             ctx.font = "20px Calibri";
             ctx.textAlign = "center";
-            ctx.fillText(i + ": " + pole[i][0] + ", " + pole[i][1], canvas.width / 2, y);
+            ctx.fillText(poradie + ": " + pole[i][0] + "        \t" + pole[i][1], canvas.width / 2, y);
             ctx.restore();
 
             y += 50;
