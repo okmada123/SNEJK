@@ -35,12 +35,12 @@
 	<script>
 		function pomoc() {
             //alert("Skus si zahrat inu hru.");
+            //localStorage.clear();
             if (localStorage.getItem("score_array") === null) alert("Nemas ulozene ziadne skore.");
             else {
                 var pole = JSON.parse(localStorage.getItem("score_array"));
                 for (i in pole) {
-                    alert(pole[i][0]);
-                    alert(pole[i][1]);
+                    console.log(pole[i]);
                 }
             }
 		}

@@ -27,17 +27,19 @@ function game_over_render() {
     ctx.restore();
     game_over_scena.clickables.push(new Button ("Hrat znova", canvas.width / 2 - 150 - 30, canvas.height / 2 + 50, 150, 50));
     game_over_scena.clickables[0].onclick = function() {
+        textfield.write_score();
         game_over_scena.clickables.length = 0;
         start_game();
     }
     game_over_scena.clickables.push(new Button ("Menu", canvas.width - canvas.width / 2 + 30, canvas.height / 2 + 50, 150, 50));
     game_over_scena.clickables[1].onclick = function() {
+        textfield.write_score();
         game_over_scena.clickables.length = 0;
         menu();
     }
 
     //vytvorenie textoveho pola
-    var textfield = new Button("Meno", canvas.width / 2 - 100, canvas.height / 2 - 20, 200, 50);
+    var textfield = new Button("Klikni a napis meno!", canvas.width / 2 - 150, canvas.height / 2 - 20, 300, 50);
     textfield.focus = false;
     
     textfield.draw_self = function() {
@@ -64,6 +66,10 @@ function game_over_render() {
     }
 
     textfield.write_score = function() {
+        if (this.text == "" || this.text == "Klikni a napis meno!") {
+            return;
+        }
+
         //otvorit
         var data;
         if ((data = JSON.parse(localStorage.getItem("score_array"))) === null) {
@@ -79,6 +85,7 @@ function game_over_render() {
 
     textfield.onclick = function() {
         this.focus = !this.focus;
+        if (this.text == "Klikni a napis meno!") this.text = "";
         this.draw_self();
     }
 
@@ -90,8 +97,8 @@ function game_over_render() {
             }
             //enter
             else if (key == 13) {
-                //alert(this.text);
-                this.write_score();
+                alert(this.text);
+                //if (this.text != "") this.write_score();
             }
             else {
                 var znak = String.fromCharCode(key);
