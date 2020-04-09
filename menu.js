@@ -35,6 +35,10 @@ function menu() {
     }
 
     menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 450, 200, 50));
+    menu_scena.clickables[2].onclick = function() {
+        menu_scena.clickables.length = 0;
+        high_scores();
+    }
     
     //pridanie zvuku do sceny
     menu_scena.clickables.push(zvuk);

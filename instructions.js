@@ -1,4 +1,4 @@
-var instructions_scena = {}
+var instructions_scena = {};
 instructions_scena.clickables = [];
 instructions_scena.onclick = function(point) {
     for (i in this.clickables) {

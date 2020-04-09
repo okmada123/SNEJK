@@ -1,6 +1,6 @@
 var canvas;
 var ctx;
-var scena;  // 0 = game,  1 = menu,  2 = instructions,  3 = gameover_scena
+var scena;  // 0 = game,  1 = menu,  2 = instructions,  3 = gameover_scena, 4 = high_scores
 var zvuk;
 
 
@@ -37,9 +37,7 @@ window.onclick = function(event) {
     var x = event.pageX - canvas.offsetLeft;
     var y = event.pageY - canvas.offsetTop;
     var point = new Suradnice(x, y);
-    //switch case na scenu...
-    // if (scena == 1) menu_scena.onclick(point);
-    // else console.log(point);
+    
     switch(scena) {
         case 0:
             game_scena.onclick(point);
@@ -53,6 +51,8 @@ window.onclick = function(event) {
         case 3:
             game_over_scena.onclick(point);
             break;
+        case 4:
+            high_scores_scena.onclick(point);
     }
 }
 
