@@ -32,19 +32,29 @@ function high_scores() {
 function vypis_skore() {
     ctx.save();
     ctx.fillStyle = "yellow";
-    ctx.fillRect(200, 0, 400, canvas.height);
+    ctx.fillRect(0, 100, canvas.width, canvas.height - 200);
     ctx.restore();
     
-    if (localStorage.getItem("score_array") === null) {
+    ctx.save();
+    ctx.font = "30px Calibri";
+    ctx.textAlign = "center";
+    ctx.fillText("Lahka:", canvas.width / 2 - 200, 100);
+    ctx.fillText("Tazka:", canvas.width / 2 + 200, 100);
+    ctx.restore();
+
+    var x = canvas.width / 2 - 200;
+    //easy
+    if (localStorage.getItem("score_array_easy") === null) {
         ctx.save();
-            ctx.font = "30px Calibri";
-            ctx.textAlign = "center";
-            ctx.fillText("Nemas ulozene ziadne skore.", canvas.width / 2, 300);
-            ctx.restore();
+        ctx.font = "20px Calibri";
+        ctx.textAlign = "center";
+        ctx.fillText("Nemas ulozene ziadne skore", x, 130);
+        ctx.fillText("pre lahku obtiaznost.", x, 160);
+        ctx.restore();
     }
     else {
-        var pole = JSON.parse(localStorage.getItem("score_array"));
-        var y = 50;
+        var pole = JSON.parse(localStorage.getItem("score_array_easy"));
+        var y = 130;
         var poradie = 0;
         for (i in pole) {
             //console.log(pole[i]);
@@ -52,7 +62,34 @@ function vypis_skore() {
             ctx.save();
             ctx.font = "20px Calibri";
             ctx.textAlign = "center";
-            ctx.fillText(poradie + ": " + pole[i][0] + "        \t" + pole[i][1], canvas.width / 2, y);
+            ctx.fillText(poradie + ": " + pole[i][0] + "        \t" + pole[i][1], x, y);
+            ctx.restore();
+            if (poradie >= 10) break;
+            y += 50;
+        }
+    }
+
+    x = canvas.width / 2 + 200;
+    //hard
+    if (localStorage.getItem("score_array_hard") === null) {
+        ctx.save();
+            ctx.font = "20px Calibri";
+            ctx.textAlign = "center";
+            ctx.fillText("Nemas ulozene ziadne skore", x, 130);
+            ctx.fillText("pre tazku obtiaznost.", x, 160);
+            ctx.restore();
+    }
+    else {
+        var pole = JSON.parse(localStorage.getItem("score_array_hard"));
+        var y = 130;
+        var poradie = 0;
+        for (i in pole) {
+            //console.log(pole[i]);
+            poradie++;
+            ctx.save();
+            ctx.font = "20px Calibri";
+            ctx.textAlign = "center";
+            ctx.fillText(poradie + ": " + pole[i][0] + "        \t" + pole[i][1], x, y);
             ctx.restore();
             if (poradie >= 10) break;
             y += 50;

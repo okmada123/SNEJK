@@ -87,24 +87,47 @@ function game_over_render() {
         }
 
         //otvorit
-        var data;
-        if ((data = JSON.parse(localStorage.getItem("score_array"))) === null) {
-            data = [];
-            data.push([this.text, skore]);
-            localStorage.setItem("score_array", JSON.stringify(data));
-        }
-        else {
-            data.push([this.text, skore]);
-
-            function descending(a, b) {
-                if (a[1] == b[1]) return 0;
-                else if (a[1] < b[1]) return 1;
-                else return -1;
+        if (!tazka) {
+            var data;
+            if ((data = JSON.parse(localStorage.getItem("score_array_easy"))) === null) {
+                data = [];
+                data.push([this.text, skore]);
+                localStorage.setItem("score_array_easy", JSON.stringify(data));
             }
+            else {
+                data.push([this.text, skore]);
 
-            data.sort(descending);
+                function descending(a, b) {
+                    if (a[1] == b[1]) return 0;
+                    else if (a[1] < b[1]) return 1;
+                    else return -1;
+                }
 
-            localStorage.setItem("score_array", JSON.stringify(data));
+                data.sort(descending);
+
+                localStorage.setItem("score_array_easy", JSON.stringify(data));
+            }
+        }   
+        else {
+            var data;
+            if ((data = JSON.parse(localStorage.getItem("score_array_hard"))) === null) {
+                data = [];
+                data.push([this.text, skore]);
+                localStorage.setItem("score_array_hard", JSON.stringify(data));
+            }
+            else {
+                data.push([this.text, skore]);
+
+                function descending(a, b) {
+                    if (a[1] == b[1]) return 0;
+                    else if (a[1] < b[1]) return 1;
+                    else return -1;
+                }
+
+                data.sort(descending);
+
+                localStorage.setItem("score_array_hard", JSON.stringify(data));
+            }
         }
     }
 
