@@ -1,29 +1,14 @@
 var menu_scena;
-// menu_scena.clickables = [];
-// menu_scena.onclick = function(point) {
-//     for (i in this.clickables) {
-//         var aktualny = this.clickables[i];    
-//         if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
-//             aktualny.onclick();
-//         }
-//     }
-// }
 
 //Inicializuje a vykresli menu
 function menu() {    
     menu_scena = new Scena("yellow");
     scena = 1;
-    // ctx.save();
-    // ctx.fillStyle = "yellow";
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // ctx.restore();
 
     //buttons
     //spustit hru
     menu_scena.clickables.push(new Button ("Spustit hru", canvas.width / 2 - 100, 250, 200, 50));
-    menu_scena.clickables[0].onclick = function() {
-        // var pocet_buttonov = menu_scena.clickables.length;
-        // for (i = 0; i < pocet_buttonov; i++)        
+    menu_scena.clickables[0].onclick = function() {   
         menu_scena.clickables.length = 0;
         start_game();
     }
@@ -44,10 +29,5 @@ function menu() {
     //pridanie zvuku do sceny
     menu_scena.clickables.push(zvuk);
 
-    menu_scena.draw_self();
-    
-    // for (i in menu_scena.clickables) {
-    //     menu_scena.clickables[i].draw_self();
-    // }
-    // ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
+    menu_scena.draw_self();    
 }

@@ -113,6 +113,11 @@ class Scena {
         this.clickables = [];
     }
 
+    //pridanie buttonu do sceny
+    add_button = function(button) {
+        this.clickables.push(button);
+    }
+
     draw_self = function() {
         //pozadie
         ctx.save();
