@@ -7,7 +7,7 @@ var zvuk;
 window.onload = function() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
-    zvuk = new Zvuk ("Zvuk", canvas.width - 100, 10, zvuk_on.width, zvuk_on.height);
+    zvuk = new Zvuk ("Zvuk", canvas.width - 100, 0, zvuk_on.width, zvuk_on.height);
     
     //nacitanie zvukov
     load_sounds();

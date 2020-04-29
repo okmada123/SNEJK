@@ -34,18 +34,25 @@ class Zvuk extends Button {
         this.zapnuty = false;
     }
     draw_self = function() {
-        ctx.save();
-        //pozadie je podla toho aka je aktualne scena
-        if (scena == 0 || scena == 3) {
-            ctx.fillStyle = "white";
-        }
-        else ctx.fillStyle = "yellow";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.restore();
         var obrazok;
         if (!this.zapnuty) obrazok = zvuk_off;
         else obrazok = zvuk_on;
+
+        //vykreslenie je podla toho aka je aktualne scena
+        if (scena == 0 || scena == 3) {
+            ctx.save();
+            ctx.fillStyle = "white";
+            ctx.fillRect(this.x, this.y, this.width - 22, this.height - 22);
+            ctx.drawImage(obrazok, this.x, this.y, zvuk_on.width - 22, zvuk_on.height - 22);
+            ctx.restore();
+        }
+        else {
+        ctx.save();
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(obrazok, this.x, this.y);
+        ctx.restore();
+        }
     }
     onclick = function() {
         this.zapnuty = !this.zapnuty;
