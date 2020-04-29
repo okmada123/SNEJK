@@ -7,25 +7,30 @@ var tick = 0;
 var skore;
 var timer;
 
-var game_scena = {};
-game_scena.clickables = [];
-game_scena.onclick = function(point) {
-    for (i in this.clickables) {
-        var aktualny = this.clickables[i];
-        if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
-            aktualny.onclick();
-        }
-    }
-}
+var game_scena;
 
 //vsetky kroky potrebne pre zacatie hry
 function start_game() {
-    game_scena.clickables.push(zvuk);
+    game_scena = new Scena();
+    scena = 0;
+
+    //musime zmenit draw_self funkciu game sceny, lebo nechceme vzdy zmazat celu obrazovku, ale iba vykreslit tlacidla
+    game_scena.draw_self = function() {
+        //buttons
+        var i;
+        for (i in this.clickables) {
+            this.clickables[i].draw_self();
+        }
+    }
+
+    //pridanie zvuku do game sceny
+    game_scena.add_button(zvuk);
+
     zvuk_gitara.play();
     if (!zvuk.zapnuty) {
         zvuk_gitara.muted = true;
     }
-    scena = 0;
+
     skore = 0;
 
      //innicializacia tela hada
@@ -66,9 +71,7 @@ function render() {
     draw_border();
     jedlo.draw();
     snake.draw();
-    for (i in game_scena.clickables) {
-        game_scena.clickables[i].draw_self();
-    }
+    game_scena.draw_self(); //clickable buttony
 }
 
 function draw_score_panel() {
@@ -194,10 +197,8 @@ function game_over_check() {
 function game_over() {
     timer = clearInterval(timer);
     snake.telo.length = 0;
-    //alert("KONEC HRI! Dosiahnute skore: " + skore + "\nTeraz sa vratis do menu, ty babrak.");
     if (zvuk.zapnuty) {
         zvuk_smrt.play();
     }
     game_over_render();
-    //menu();
 }

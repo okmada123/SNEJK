@@ -91,7 +91,11 @@ class Zvuk extends Button {
     }
     draw_self = function() {
         ctx.save();
-        ctx.fillStyle = "yellow";
+        //pozadie je podla toho aka je aktualne scena
+        if (scena == 0 || scena == 3) {
+            ctx.fillStyle = "white";
+        }
+        else ctx.fillStyle = "yellow";
         ctx.fillRect(this.x, this.y, this.width, this.height);
         ctx.restore();
         var obrazok;
