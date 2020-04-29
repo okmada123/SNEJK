@@ -1,11 +1,11 @@
 const POSUN = 20;
 const DEFAULT_DLZKA_HADA = 20;
-var FPS = 10;
+var FPS;
 var keys = [];
 var tick = 1;
 var skore;
 var timer;
-var tazka = true; //obtiaznost
+var tazka = false; //obtiaznost
 
 var game_scena;
 
@@ -13,6 +13,8 @@ var game_scena;
 function start_game() {
     game_scena = new Scena();
     scena = 0;
+    skore = 0;
+    FPS = 10;
 
     //musime zmenit draw_self funkciu game sceny, lebo nechceme vzdy zmazat celu obrazovku, ale iba vykreslit tlacidla
     game_scena.draw_self = function() {
@@ -31,7 +33,6 @@ function start_game() {
         zvuk_gitara.muted = true;
     }
 
-    skore = 0;
 
      //vytvorenie tela hada
      for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
@@ -45,7 +46,7 @@ function start_game() {
     //generovanie prveho jedla
     //nastavenie sance spawnovania powerupu podla obtiaznosti
     if (tazka) jedlo.powerup_sanca = 0;
-    else jedlo.powerup_sanca = 70;
+    else jedlo.powerup_sanca = 7;
     jedlo.update();
     jedlo.powerup = false;
     
