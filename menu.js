@@ -7,27 +7,32 @@ function menu() {
 
     //buttons
     //spustit hru
-    menu_scena.clickables.push(new Button ("Spustit hru", canvas.width / 2 - 100, 250, 200, 50));
-    menu_scena.clickables[0].onclick = function() {   
+    var button_spustit_hru = new Button ("Spustit hru", canvas.width / 2 - 100, 250, 200, 50);
+    button_spustit_hru.onclick = function() {   
         menu_scena.clickables.length = 0;
         start_game();
     }
+    menu_scena.add_button(button_spustit_hru);
 
     //instrukcie
-    menu_scena.clickables.push(new Button ("Instrukcie", canvas.width / 2 - 100, 350, 200, 50));
-    menu_scena.clickables[1].onclick = function() {
+    var button_instrukcie = new Button ("Instrukcie", canvas.width / 2 - 100, 350, 200, 50);
+    button_instrukcie.onclick = function() {
         menu_scena.clickables.length = 0;
         instructions();
     }
+    menu_scena.add_button(button_instrukcie);
 
-    menu_scena.clickables.push(new Button ("Najvyssie skore", canvas.width / 2 - 100, 450, 200, 50));
-    menu_scena.clickables[2].onclick = function() {
+    //high scores
+    var button_high_scores = new Button ("Najvyssie skore", canvas.width / 2 - 100, 450, 200, 50);
+    button_high_scores.onclick = function() {
         menu_scena.clickables.length = 0;
         high_scores();
     }
+    menu_scena.add_button(button_high_scores);
     
     //pridanie zvuku do sceny
-    menu_scena.clickables.push(zvuk);
+    menu_scena.add_button(zvuk);
 
+    //vykreslenie samotnej sceny
     menu_scena.draw_self();    
 }
