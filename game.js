@@ -1,10 +1,11 @@
 const POSUN = 20;
 const DEFAULT_DLZKA_HADA = 20;
-const FPS = 10;
+var FPS = 10;
 var keys = [];
-var tick = 0;
+var tick = 1;
 var skore;
 var timer;
+var tazka = true; //obtiaznost
 
 var game_scena;
 
@@ -42,7 +43,9 @@ function start_game() {
     snake.dy = POSUN;
 
     //generovanie prveho jedla
-    jedlo.powerup_sanca = 7;
+    //nastavenie sance spawnovania powerupu podla obtiaznosti
+    if (tazka) jedlo.powerup_sanca = 0;
+    else jedlo.powerup_sanca = 70;
     jedlo.update();
     jedlo.powerup = false;
     
@@ -50,6 +53,17 @@ function start_game() {
 }
 
 function mainloop() {
+    //zrychlovanie v tazkej obtiaznosti:
+    if (tazka) {
+        if (tick % (FPS * 10) == 0) { //zrychluje kazdych 10s
+            FPS++;
+            timer = clearInterval(timer);
+            timer = setInterval(mainloop, 1000 / FPS);
+            tick = 0;
+            
+        }
+    }
+    
     tick++;  
     zmena_smeru(); //key press handle
     snake.move(); //posunutie hada
@@ -59,6 +73,7 @@ function mainloop() {
     render();
     
     game_over_check();
+
 }
 
 function render() {
