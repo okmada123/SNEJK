@@ -89,7 +89,7 @@ class Button {
 class Zvuk extends Button {
     constructor(text, x, y, width, height) {
         super(text, x, y, width, height);
-        this.zapnuty = true;
+        this.zapnuty = false;
     }
     draw_self = function() {
         ctx.save();
@@ -109,19 +109,19 @@ class Zvuk extends Button {
 }
 
 class Scena {
-    constructor(bgcolor) {
-        this.bgcolor = bgcolor;
+    constructor() {
         this.clickables = [];
     }
 
     draw_self = function() {
         //pozadie
         ctx.save();
-        ctx.fillStyle = this.bgcolor;
+        ctx.fillStyle = "yellow";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.restore();
 
         //buttons
+        var i;
         for (i in this.clickables) {
             this.clickables[i].draw_self();
         }
@@ -130,8 +130,9 @@ class Scena {
         ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
     }
 
-    //onclick handler, skontroluje vsetky buttony
+    //onclick handler priamo v scene - skontroluje vsetky buttony
     onclick = function(point) {
+        var i;
         for(i in this.clickables) {
             var aktualny = this.clickables[i];
             if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {

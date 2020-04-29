@@ -22,6 +22,9 @@ game_scena.onclick = function(point) {
 function start_game() {
     game_scena.clickables.push(zvuk);
     zvuk_gitara.play();
+    if (!zvuk.zapnuty) {
+        zvuk_gitara.muted = true;
+    }
     scena = 0;
     skore = 0;
 

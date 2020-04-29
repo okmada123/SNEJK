@@ -1,21 +1,22 @@
-var menu_scena = {};
-menu_scena.clickables = [];
-menu_scena.onclick = function(point) {
-    for (i in this.clickables) {
-        var aktualny = this.clickables[i];    
-        if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
-            aktualny.onclick();
-        }
-    }
-}
+var menu_scena;
+// menu_scena.clickables = [];
+// menu_scena.onclick = function(point) {
+//     for (i in this.clickables) {
+//         var aktualny = this.clickables[i];    
+//         if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
+//             aktualny.onclick();
+//         }
+//     }
+// }
 
 //Inicializuje a vykresli menu
 function menu() {    
+    menu_scena = new Scena("yellow");
     scena = 1;
-    ctx.save();
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
+    // ctx.save();
+    // ctx.fillStyle = "yellow";
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // ctx.restore();
 
     //buttons
     //spustit hru
@@ -42,9 +43,11 @@ function menu() {
     
     //pridanie zvuku do sceny
     menu_scena.clickables.push(zvuk);
+
+    menu_scena.draw_self();
     
-    for (i in menu_scena.clickables) {
-        menu_scena.clickables[i].draw_self();
-    }
-    ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
+    // for (i in menu_scena.clickables) {
+    //     menu_scena.clickables[i].draw_self();
+    // }
+    // ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
 }
