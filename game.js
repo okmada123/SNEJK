@@ -1,7 +1,6 @@
 const POSUN = 20;
 const DEFAULT_DLZKA_HADA = 20;
 const FPS = 10;
-const SANCA_NA_POWERUP = 7;
 var keys = [];
 var tick = 0;
 var skore;
@@ -9,7 +8,7 @@ var timer;
 
 var game_scena;
 
-//vsetky kroky potrebne pre zacatie hry
+//inicializacia zaciatku hry
 function start_game() {
     game_scena = new Scena();
     scena = 0;
@@ -33,7 +32,7 @@ function start_game() {
 
     skore = 0;
 
-     //innicializacia tela hada
+     //vytvorenie tela hada
      for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
         snake.telo.push(new Suradnice(240 + i * POSUN, 110));
     }
@@ -43,8 +42,9 @@ function start_game() {
     snake.dy = POSUN;
 
     //generovanie prveho jedla
-    jedlo.powerup = false;
+    jedlo.powerup_sanca = 7;
     jedlo.update();
+    jedlo.powerup = false;
     
     timer = setInterval(mainloop, 1000 / FPS);
 }
