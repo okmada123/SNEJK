@@ -107,3 +107,36 @@ class Zvuk extends Button {
         this.draw_self();
     }
 }
+
+class Scena {
+    constructor(bgcolor) {
+        this.bgcolor = bgcolor;
+        this.clickables = [];
+    }
+
+    draw_self = function() {
+        //pozadie
+        ctx.save();
+        ctx.fillStyle = this.bgcolor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.restore();
+
+        //buttons
+        for (i in this.clickables) {
+            this.clickables[i].draw_self();
+        }
+
+        //logo
+        ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
+    }
+
+    //onclick handler, skontroluje vsetky buttony
+    onclick = function(point) {
+        for(i in this.clickables) {
+            var aktualny = this.clickables[i];
+            if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
+                aktualny.onclick();
+            }
+        }
+    }
+}
