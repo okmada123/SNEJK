@@ -20,6 +20,9 @@ function high_scores() {
     }
     high_scores_scena.add_button(button_zmaz);
 
+    //pridanie zvuku do sceny
+    high_scores_scena.add_button(zvuk);
+
     //vykresli scenu - pozadie + buttons
     high_scores_scena.draw_self();
     //vypise skore podla toho co je ulozene v cache
