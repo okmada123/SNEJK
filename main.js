@@ -130,9 +130,6 @@ class Scena {
         for (i in this.clickables) {
             this.clickables[i].draw_self();
         }
-
-        //logo
-        ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
     }
 
     //onclick handler priamo v scene - skontroluje vsetky buttony

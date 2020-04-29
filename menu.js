@@ -2,7 +2,7 @@ var menu_scena;
 
 //Inicializuje a vykresli menu
 function menu() {    
-    menu_scena = new Scena("yellow");
+    menu_scena = new Scena();
     scena = 1;
 
     //buttons
@@ -34,5 +34,7 @@ function menu() {
     menu_scena.add_button(zvuk);
 
     //vykreslenie samotnej sceny
-    menu_scena.draw_self();    
+    menu_scena.draw_self();
+    //logo
+    ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);    
 }

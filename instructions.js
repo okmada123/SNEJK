@@ -1,37 +1,25 @@
-var instructions_scena = {};
-instructions_scena.clickables = [];
-instructions_scena.onclick = function(point) {
-    for (i in this.clickables) {
-        var aktualny = this.clickables[i];    
-        if (point.x >= aktualny.x && point.x <= aktualny.x + aktualny.width && point.y >= aktualny.y && point.y <= aktualny.y + aktualny.height) {
-            aktualny.onclick();
-        }
-    }
-}
+var instructions_scena;
 
+//inicializacia prepnutia do sceny instrukcie
 function instructions() {
+    instructions_scena = new Scena();
     scena = 2;
-    ctx.save();
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
 
     //buttons
-    var spat = new Button ("Spat", 10, 10, 100, 50);
-    spat.onclick = function() {
+    var button_spat = new Button ("Spat", 10, 10, 100, 50);
+    button_spat.onclick = function() {
         instructions_scena.clickables.length = 0;
         menu();
     }
-    instructions_scena.clickables.push(spat);
+    instructions_scena.add_button(button_spat);
 
     //pridanie zvuku do sceny
-    instructions_scena.clickables.push(zvuk);
+    instructions_scena.add_button(zvuk);
 
-    //vykreslenie vsetkych buttonov
-    for (i in instructions_scena.clickables) {
-        instructions_scena.clickables[i].draw_self();
-    }
+    //vykreslenie sceny - pozadie + tlacidla
+    instructions_scena.draw_self();
 
+    //vykreslenie instrukcii
     ctx.save();
     ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);
     ctx.drawImage(sipky, canvas.width / 2 - sipky.width / 2, 400);
