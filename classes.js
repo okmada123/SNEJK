@@ -56,7 +56,8 @@ class Zvuk extends Button {
     }
     onclick = function() {
         this.zapnuty = !this.zapnuty;
-        zvuk_gitara.muted = !zvuk_gitara.muted;
+        if (this.zapnuty) zvuk_gitara.muted = false;
+        else zvuk_gitara.muted = true;
         this.draw_self();
     }
 }
