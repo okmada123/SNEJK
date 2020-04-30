@@ -37,19 +37,19 @@ function vypis_skore() {
     
     ctx.save();
     ctx.font = "30px Calibri";
-    ctx.textAlign = "center";
-    ctx.fillText("Lahka:", canvas.width / 2 - 200, 100);
-    ctx.fillText("Tazka:", canvas.width / 2 + 200, 100);
+    //ctx.textAlign = "center";
+    ctx.fillText("Lahka:", canvas.width / 2 - 300, 100);
+    ctx.fillText("Tazka:", canvas.width / 2 + 150, 100);
     ctx.restore();
 
-    var x = canvas.width / 2 - 200;
+    var x = canvas.width / 2 - 350;
     //easy
     if (localStorage.getItem("score_array_easy") === null) {
         ctx.save();
         ctx.font = "20px Calibri";
         ctx.textAlign = "center";
-        ctx.fillText("Nemas ulozene ziadne skore", x, 130);
-        ctx.fillText("pre lahku obtiaznost.", x, 160);
+        ctx.fillText("Nemas ulozene ziadne skore", x+100, 130);
+        ctx.fillText("pre lahku obtiaznost.", x+100, 160);
         ctx.restore();
     }
     else {
@@ -61,15 +61,16 @@ function vypis_skore() {
             poradie++;
             ctx.save();
             ctx.font = "20px Calibri";
+            ctx.fillText(poradie + ": " + pole[i][0], x, y);
             ctx.textAlign = "center";
-            ctx.fillText(poradie + ": " + pole[i][0] + "        \t" + pole[i][1], x, y);
+            ctx.fillText(pole[i][1], x+250, y);
             ctx.restore();
-            if (poradie >= 10) break;
-            y += 50;
+            if (poradie >= 15) break;
+            y += 30;
         }
     }
 
-    x = canvas.width / 2 + 200;
+    x = canvas.width / 2 + 80;
     //hard
     if (localStorage.getItem("score_array_hard") === null) {
         ctx.save();
@@ -88,11 +89,12 @@ function vypis_skore() {
             poradie++;
             ctx.save();
             ctx.font = "20px Calibri";
+            ctx.fillText(poradie + ": " + pole[i][0], x, y);
             ctx.textAlign = "center";
-            ctx.fillText(poradie + ": " + pole[i][0] + "        \t" + pole[i][1], x, y);
+            ctx.fillText(pole[i][1], x+250, y);
             ctx.restore();
-            if (poradie >= 10) break;
-            y += 50;
+            if (poradie >= 15) break;
+            y += 30;
         }
     }
 }
