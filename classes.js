@@ -86,7 +86,7 @@ class Scena {
         }
     }
 
-    //onclick handler priamo v scene - skontroluje vsetky buttony
+    //onclick handler priamo v scene - skontroluje vsetky buttony a ak treba, zavola ich onclcick funkciu
     onclick = function(point) {
         var i;
         for(i in this.clickables) {

@@ -5,7 +5,7 @@ var keys = [];
 var tick = 1;
 var skore;
 var timer;
-var tazka = false; //obtiaznost
+var tazka = false; //defaultna obtiaznost
 
 var game_scena;
 
@@ -33,9 +33,8 @@ function start_game() {
         zvuk_gitara.muted = true;
     }
 
-
-     //vytvorenie tela hada
-     for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
+    //vytvorenie tela hada
+    for (i = 0; i < DEFAULT_DLZKA_HADA; i++) {
         snake.telo.push(new Suradnice(240 + i * POSUN, 110));
     }
 
@@ -43,29 +42,21 @@ function start_game() {
     snake.dx = 0;
     snake.dy = POSUN;
 
-    //generovanie prveho jedla
-    //nastavenie sance spawnovania powerupu podla obtiaznosti
+    //nastavenie sance spawnovania powerupu (v %) podla obtiaznosti
     if (tazka) jedlo.powerup_sanca = 0;
     else jedlo.powerup_sanca = 10;
+    //generovanie prveho jedla
     jedlo.update();
-    jedlo.powerup = false;
+    jedlo.powerup = false; //prve jedlo nemoze byt tabletka
     
     timer = setInterval(mainloop, 1000 / FPS);
 }
 
 function mainloop() {
-    //zrychlovanie v tazkej obtiaznosti:
-    if (tazka) {
-        if (tick % (FPS * 10) == 0) { //zrychluje kazdych 10s
-            FPS++;
-            timer = clearInterval(timer);
-            timer = setInterval(mainloop, 1000 / FPS);
-            tick = 0;            
-        }
-    }
+    zrychlovanie(); //zrychlovanie v tazkej obtiaznosti
     
     tick++;  
-    zmena_smeru(); //key press handle
+    zmena_smeru(); //handle key presses
     snake.move(); //posunutie hada
     zjedenie_check(); //kontrola zjedenia jedla
     powerup_timer(); //tabletka zmizne po 3sek.
@@ -111,7 +102,7 @@ function draw_border() {
 }
 
 function zjedenie_check() {
-    //pomocna funkcia, ktora sa zavola ked sa zakusneme do jablka/powerupu
+    //ked sa zakusneme, triggerne to nad snake-om bud powerup() alebo zjedenie() - teda bud sa skrati alebo predlzi
     function hit() {
         if (jedlo.powerup) snake.powerup();
         else snake.zjedenie();
@@ -223,6 +214,17 @@ function powerup_timer() {
     if (jedlo.powerup) {
         if ((tick - jedlo.powerup_tick) >= 3 * FPS) {
             jedlo.update();
+        }
+    }
+}
+
+function zrychlovanie() {
+    if (tazka) {
+        if (tick % (FPS * 10) == 0) { //zrychluje kazdych 10s
+            FPS++;
+            timer = clearInterval(timer);
+            timer = setInterval(mainloop, 1000 / FPS);
+            tick = 0;            
         }
     }
 }

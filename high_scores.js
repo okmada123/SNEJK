@@ -25,7 +25,7 @@ function high_scores() {
 
     //vykresli scenu - pozadie + buttons
     high_scores_scena.draw_self();
-    //vypise skore podla toho co je ulozene v cache
+    //vypise skore podla toho co je ulozene v localStorage
     vypis_skore();
 }
 
@@ -37,7 +37,6 @@ function vypis_skore() {
     
     ctx.save();
     ctx.font = "30px Calibri";
-    //ctx.textAlign = "center";
     ctx.fillText("Lahka:", canvas.width / 2 - 300, 100);
     ctx.fillText("Tazka:", canvas.width / 2 + 150, 100);
     ctx.restore();
@@ -57,7 +56,6 @@ function vypis_skore() {
         var y = 130;
         var poradie = 0;
         for (i in pole) {
-            //console.log(pole[i]);
             poradie++;
             ctx.save();
             ctx.font = "20px Calibri";
@@ -76,8 +74,8 @@ function vypis_skore() {
         ctx.save();
             ctx.font = "20px Calibri";
             ctx.textAlign = "center";
-            ctx.fillText("Nemas ulozene ziadne skore", x, 130);
-            ctx.fillText("pre tazku obtiaznost.", x, 160);
+            ctx.fillText("Nemas ulozene ziadne skore", x+100, 130);
+            ctx.fillText("pre tazku obtiaznost.", x+100, 160);
             ctx.restore();
     }
     else {
@@ -85,7 +83,6 @@ function vypis_skore() {
         var y = 130;
         var poradie = 0;
         for (i in pole) {
-            //console.log(pole[i]);
             poradie++;
             ctx.save();
             ctx.font = "20px Calibri";

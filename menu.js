@@ -87,6 +87,5 @@ function menu() {
 
     //vykreslenie samotnej sceny
     menu_scena.draw_self();
-    //logo
-    ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);    
+    ctx.drawImage(logo, canvas.width / 2 - logo.width / 2, 50);   //logo  
 }

@@ -21,7 +21,6 @@ window.onkeydown = function(event) {
         event.preventDefault();
         if (!keys[event.keyCode]) {
             keys[event.keyCode] = true;
-            //console.log(event.keyCode);
         }
     }
     else if (scena == 3) { //gameover
