@@ -46,7 +46,7 @@ function start_game() {
     //generovanie prveho jedla
     //nastavenie sance spawnovania powerupu podla obtiaznosti
     if (tazka) jedlo.powerup_sanca = 0;
-    else jedlo.powerup_sanca = 7;
+    else jedlo.powerup_sanca = 10;
     jedlo.update();
     jedlo.powerup = false;
     
@@ -60,8 +60,7 @@ function mainloop() {
             FPS++;
             timer = clearInterval(timer);
             timer = setInterval(mainloop, 1000 / FPS);
-            tick = 0;
-            
+            tick = 0;            
         }
     }
     
@@ -69,6 +68,7 @@ function mainloop() {
     zmena_smeru(); //key press handle
     snake.move(); //posunutie hada
     zjedenie_check(); //kontrola zjedenia jedla
+    powerup_timer(); //tabletka zmizne po 3sek.
     
     //potom sa vsetko vykresli
     render();
@@ -217,4 +217,12 @@ function game_over() {
         zvuk_smrt.play();
     }
     game_over_render();
+}
+
+function powerup_timer() {
+    if (jedlo.powerup) {
+        if ((tick - jedlo.powerup_tick) >= 3 * FPS) {
+            jedlo.update();
+        }
+    }
 }
