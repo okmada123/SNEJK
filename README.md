@@ -1,1 +1,4 @@
-SNEJK
+# SNEJK
+
+
+Klasický Snake v Javascripte.
